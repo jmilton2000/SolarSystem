@@ -44,7 +44,7 @@ public class Solar {
         return planets.get(index);
     }
 
-    public void addPlanet(String name, int size, int color) {
+    public void addPlanet(String name, int size, int color) throws FileNotFoundException {
         Planet planet = new Planet();
         planet.setDistance(0);
         planet.setSize(size);
@@ -53,5 +53,5 @@ public class Solar {
         export();
         //new SolarLoad.export();
     }
-    public void export() { }
+    public void export() throws FileNotFoundException { }
 }
