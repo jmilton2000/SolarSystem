@@ -8,6 +8,5 @@ public class Testing {
         Solar test = new Solar();
         test.load("Solar System");
         test.export();
-        //
     }
 }
