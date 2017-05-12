@@ -12,9 +12,12 @@ public class Solar {
     }
 
     public void setSunSize(int sunSize) { this.sunSize = sunSize; }
-    public int getSunSize() { return sunSize; }
-    public ArrayList<Planet> getPlanets() { return planets; }
-    public String getName() { return name; }
+    public int getSunSize() {
+        return sunSize; }
+    public ArrayList<Planet> getPlanets() {
+        return planets; }
+    public String getName() {
+        return name; }
     public void setName(String name) { this.name = name; }
 
     public void addPlanet() {
@@ -29,7 +32,8 @@ public class Solar {
     public void editPlanet(String name) {
         if(planets.size() == 0) {
             System.out.println("Error: no planets in solar system"); //change later
-        } else {
+        }
+        else {
             Planet planet = this.contains(name);
         }
     }
@@ -51,7 +55,17 @@ public class Solar {
         planet.setColor(color);
         planets.add(planet);
         export();
-        //new SolarLoad.export();
     }
-    public void export() throws FileNotFoundException { }
+
+    public void export() throws FileNotFoundException {
+        PrintStream output = new PrintStream(new File(name));
+        output.println(getSunSize());
+        for(int A = 0; A < planets.size(); A++) {
+            Planet planet = planets.get(A);
+            output.println(planet.getName());
+            output.println(planet.getSize());
+            output.println(planet.getColor());
+            output.println(planet.getDistance());
+        }
+    }
 }
