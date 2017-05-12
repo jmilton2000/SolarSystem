@@ -1,5 +1,7 @@
+import java.awt.*;
 import java.util.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class Solar {
     private ArrayList<Planet> planets = new ArrayList<Planet>();
@@ -12,21 +14,20 @@ public class Solar {
     }
 
     public void setSunSize(int sunSize) { this.sunSize = sunSize; }
-    public int getSunSize() {
-        return sunSize; }
-    public ArrayList<Planet> getPlanets() {
-        return planets; }
-    public String getName() {
-        return name; }
+    public int getSunSize() { return sunSize; }
+    public ArrayList<Planet> getPlanets() { return planets; }
+    public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public void addPlanet() {
+    public void addPlanet() throws FileNotFoundException {
         int size = 0;
         String name = "planet" + (1 + planets.size());
         Planet planet = new Planet();
         planet.setDistance(0);
         planet.setName(name);
         planets.add(planet);
+        export();
+        //editPlanet();
     }
 
     public void editPlanet(String name) {
@@ -48,17 +49,16 @@ public class Solar {
         return planets.get(index);
     }
 
-    public void addPlanet(String name, int size, int color) throws FileNotFoundException {
+    public void addPlanet(String name, int size, int color, int distance) {
         Planet planet = new Planet();
         planet.setDistance(0);
         planet.setSize(size);
         planet.setColor(color);
         planets.add(planet);
-        export();
     }
 
     public void export() throws FileNotFoundException {
-        PrintStream output = new PrintStream(new File(name));
+        PrintStream output = new PrintStream(new File(name + ".txt"));
         output.println(getSunSize());
         for(int A = 0; A < planets.size(); A++) {
             Planet planet = planets.get(A);
@@ -66,6 +66,19 @@ public class Solar {
             output.println(planet.getSize());
             output.println(planet.getColor());
             output.println(planet.getDistance());
+        }
+    }
+
+    public void load(String name) throws FileNotFoundException {
+        Scanner input = new Scanner(new File(name + ".txt"));
+        this.name = name;
+        sunSize = input.nextInt();
+        while (input.hasNextLine()) {
+            String pName = input.next();
+            int size = input.nextInt();
+            int color = input.nextInt();
+            int distance = input.nextInt();
+            addPlanet(pName, size, color, distance);
         }
     }
 }
