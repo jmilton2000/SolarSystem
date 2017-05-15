@@ -1,7 +1,6 @@
 import java.awt.*;
 import java.util.*;
 import java.io.*;
-import java.util.Scanner;
 
 public class Solar {
     private ArrayList<Planet> planets = new ArrayList<Planet>();
@@ -9,7 +8,7 @@ public class Solar {
     private String name;
 
     public Solar() {
-        name = "Solar System.txt";
+        name = "SolarSystem";
         sunSize = 80;
     }
 
@@ -51,29 +50,32 @@ public class Solar {
 
     public void addPlanet(String name, int size, int color, int distance) {
         Planet planet = new Planet();
-        planet.setDistance(0);
+        planet.setName(name);
+        planet.setDistance(distance);
         planet.setSize(size);
         planet.setColor(color);
         planets.add(planet);
     }
 
     public void export() throws FileNotFoundException {
-        PrintStream output = new PrintStream(new File(name + ".txt"));
+        PrintStream output = new PrintStream(new File(name + ".sol"));
+        output.println(planets.size());
         output.println(getSunSize());
         for(int A = 0; A < planets.size(); A++) {
             Planet planet = planets.get(A);
             output.println(planet.getName());
-            output.println(planet.getSize());
+            output.println((planet.getSize() - 20)/10);
             output.println(planet.getColor());
             output.println(planet.getDistance());
         }
     }
 
     public void load(String name) throws FileNotFoundException {
-        Scanner input = new Scanner(new File(name + ".txt"));
+        Scanner input = new Scanner(new File(name + ".sol"));
         this.name = name;
+        int num = input.nextInt();
         sunSize = input.nextInt();
-        while (input.hasNextLine()) {
+        for(int A = 0; A < num; A++) {
             String pName = input.next();
             int size = input.nextInt();
             int color = input.nextInt();
