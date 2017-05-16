@@ -29,20 +29,17 @@ public class Solar {
         //editPlanet();
     }
 
-    public void editPlanet(String name) {
+    public Planet findPlanet(String name) {
+        int index = 0;
         if(planets.size() == 0) {
             System.out.println("Error: no planets in solar system"); //change later
         }
         else {
-            Planet planet = this.contains(name);
-        }
-    }
 
-    public Planet contains(String name) {
-        int index = 0;
-        for(int A = 0; A < planets.size(); A++) {
-            if(planets.get(A).getName().equals(name)) {
-                index = A;
+            for (int A = 0; A < planets.size(); A++) {
+                if (planets.get(A).getName().equals(name)) {
+                    index = A;
+                }
             }
         }
         return planets.get(index);
@@ -50,7 +47,7 @@ public class Solar {
 
     public void addPlanet(String name, int size, int color, int distance) {
         Planet planet = new Planet();
-        planet.setName(name);
+        planet.setName(name.replaceAll(" ", "_"));
         planet.setDistance(distance);
         planet.setSize(size);
         planet.setColor(color);
@@ -77,6 +74,7 @@ public class Solar {
         sunSize = input.nextInt();
         for(int A = 0; A < num; A++) {
             String pName = input.next();
+            pName = pName.replaceAll("_", " ");
             int size = input.nextInt();
             int color = input.nextInt();
             int distance = input.nextInt();
