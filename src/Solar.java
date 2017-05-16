@@ -26,7 +26,6 @@ public class Solar {
         planet.setName(name);
         planets.add(planet);
         export();
-        //editPlanet();
     }
 
     public Planet findPlanet(String name) {
