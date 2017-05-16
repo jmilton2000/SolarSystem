@@ -55,7 +55,7 @@ public class Solar {
     }
 
     public void export() throws FileNotFoundException {
-        PrintStream output = new PrintStream(new File(name + ".sol"));
+        PrintStream output = new PrintStream(new File("C:/Users/ros_jcmilton/IdeaProjects/Solar System/save/" + name + ".sol"));
         output.println(planets.size());
         output.println(getSunSize());
         for(int A = 0; A < planets.size(); A++) {
@@ -68,7 +68,7 @@ public class Solar {
     }
 
     public void load(String name) throws FileNotFoundException {
-        Scanner input = new Scanner(new File(name + ".sol"));
+        Scanner input = new Scanner(new File("C:/Users/ros_jcmilton/IdeaProjects/Solar System/save/" + name + ".sol"));
         this.name = name;
         int num = input.nextInt();
         sunSize = input.nextInt();
