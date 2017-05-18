@@ -1,6 +1,7 @@
 /**
  * Created by ros_rcsoyama on 5/11/2017.
  */
+
 import javax.swing.*;
 
 import java.awt.*;
@@ -11,20 +12,19 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-public class SolarUI extends JFrame implements ActionListener {
+public class Main extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
 
-        SolarUI frame = new SolarUI();
-        frame.setVisible(true);
+        new Main().setVisible(true);
     }
 
-    private SolarUI(){
+    private Main() {
         //name of the screen
         super("Start Screen");
 
         //makes the size of the screen width by height
-        setSize(600,600);
+        setSize(600, 600);
         setResizable(false);
 
         //When you close the frame, end code
@@ -56,7 +56,8 @@ public class SolarUI extends JFrame implements ActionListener {
         //closes shit
         exit.addActionListener(actionEvent -> {
             System.out.println("Closed");
-            System.exit(0); });
+            System.exit(0);
+        });
 
         JMenuItem extra = new JMenu("Extra");
         JMenuItem hello = new JMenuItem("hey");
@@ -87,6 +88,7 @@ public class SolarUI extends JFrame implements ActionListener {
         add(loadButton);
         add(CreateButton);
     }
+
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String name = actionEvent.getActionCommand();
