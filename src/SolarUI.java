@@ -12,19 +12,20 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-public class Main extends JFrame implements ActionListener {
+public class SolarUI extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
 
-        new Main().setVisible(true);
+        SolarUI frame = new SolarUI();
+        frame.setVisible(true);
     }
 
-    private Main() {
+    private SolarUI() {
         //name of the screen
         super("Start Screen");
 
         //makes the size of the screen width by height
-        setSize(600, 600);
+        setSize(1000, 300);
         setResizable(false);
 
         //When you close the frame, end code
@@ -87,6 +88,10 @@ public class Main extends JFrame implements ActionListener {
         //Creates the button onto the UI
         add(loadButton);
         add(CreateButton);
+
+        Drawing drawing = new Drawing();
+        add(drawing);
+
     }
 
     @Override

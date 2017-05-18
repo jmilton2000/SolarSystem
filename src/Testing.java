@@ -8,6 +8,6 @@ public class Testing {
         test.addPlanet("planet 2", 1, 1, 40);
         //test.load("SolarSystem");
         test.export();
-        System.out.println("Done!");
+        //System.out.println("Done!");
     }
 }
