@@ -17,6 +17,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.util.*;
+import javax.swing.JTextField;
 
 
 public class SolarUI extends JFrame implements ActionListener {
@@ -92,6 +93,15 @@ public class SolarUI extends JFrame implements ActionListener {
         //closes shit
         load.addActionListener(
                 actionEvent -> {
+                    JFrame f = new JFrame("Please enter System Name");
+                    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    f.getContentPane().setLayout(new FlowLayout());
+                    JTextField field = new JTextField(20);
+                    f.add(field);
+                    f.pack();
+                    f.setVisible(true);
+
+
                     try {
                         solar.load("SolarSystem");
                     } catch (FileNotFoundException ex) {
