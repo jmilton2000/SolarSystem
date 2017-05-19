@@ -30,7 +30,7 @@ public class Solar {
 
     public void addPlanet() throws FileNotFoundException {
         int size = 0;
-        String name = "planet" + (1 + planets.size());
+        String name = "planet " + (1 + planets.size());
         Planet planet = new Planet();
         planet.setDistance(makeDistance(planet));
         planet.setName(name);
@@ -55,7 +55,7 @@ public class Solar {
     public void addPlanet(String name, int size, int color, int distance) {
         Planet planet = new Planet();
         planet.setName(name.replaceAll(" ", "_"));
-        planet.setDistance(distance);
+        planet.setDistance(makeDistance(planet));
         planet.setSize(size);
         planet.setColor(color);
         planets.add(planet);
@@ -92,10 +92,11 @@ public class Solar {
 
     public int makeDistance(Planet p) {
         if(planets.size() == 0) {
-            return (sunSize/2) + 100 + (p.getSize()/2);
+            return (sunSize/2) + 200 + (p.getSize()/2);
         }
         else {
-            return (planets.get(planets.size() - 1).getSize()/2) + 100 + (p.getSize()/2);
+            Planet pre = planets.get(planets.size() - 1);
+            return (pre.getSize()/2) + (pre.getDistance()) + 100 + (p.getSize()/2);
         }
     }
 }

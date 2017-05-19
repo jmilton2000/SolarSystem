@@ -27,9 +27,6 @@ public class SolarUI extends JFrame implements ActionListener {
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
-
-
-
     }
 
     private SolarUI() {
@@ -40,7 +37,7 @@ public class SolarUI extends JFrame implements ActionListener {
         setSize(1000, 500);
         setResizable(false);
 
-        //When you close the frame, end code
+        //When you close the frame, end code )
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new GridLayout(5, 10));
 
@@ -49,18 +46,23 @@ public class SolarUI extends JFrame implements ActionListener {
         frame.setSize(1000, 200);
 
 
-        JPanel panel = new JPanel() {
-            @Override
-            public void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.setColor(Color.black);
-                g.fillRect(0, 0, 1000, 200);
-                if(solar.getPlanets().size() > 0) {
-                    g.setColor(Color.yellow);
-                    g.fillOval(100, 50, 80, 80);
-                }
-            }
-        };
+        JPanel panel =
+                new JPanel() {
+                    @Override
+                    public void paintComponent(Graphics g) {
+                        super.paintComponent(g);
+                        g.setColor(Color.black);
+                        g.fillRect(0, 0, 1000, 200);
+                        g.setColor(Color.yellow);
+                        g.fillOval(100, 50, 80, 80);
+                        for(int A = 0; A < solar.getPlanets().size(); A++) {
+                            g.setColor(Color.blue);
+                            int size = solar.getPlanets().get(A).getSize();
+                            int distance = solar.getPlanets().get(A).getDistance();
+                            g.fillOval(distance, 100 + 10 - size, size, size);
+                        }
+                    }
+                };
         frame.add(panel);
         frame.validate();
         frame.repaint();
@@ -88,6 +90,16 @@ public class SolarUI extends JFrame implements ActionListener {
         JMenuItem exit = new JMenuItem("Exit");
 
         //closes shit
+        load.addActionListener(
+                actionEvent -> {
+                    try {
+                        solar.load("SolarSystem");
+                    }
+                    catch (FileNotFoundException ex) { }
+                    System.out.print(solar.getPlanets().size());
+                    frame.repaint();
+                });
+
         exit.addActionListener(
                 actionEvent -> {
                     System.out.println("Closed");
@@ -113,7 +125,7 @@ public class SolarUI extends JFrame implements ActionListener {
 
         //makes the action listener parameters this
         loadButton.setActionCommand("edit");
-        CreateButton.setActionCommand("Load");
+        CreateButton.setActionCommand("add");
 
         //makes the button work
         loadButton.addActionListener(this);
@@ -136,19 +148,14 @@ public class SolarUI extends JFrame implements ActionListener {
             System.out.println("Good shit");
 
         }
-        else if (name.equals("add")) {
-            System.out.println("Good job");
-        }
         else if (name.equalsIgnoreCase("exit")) {
             System.out.println("Closed");
             System.exit(0);
         }
-        else if (name.equals("Load")) {
+        else if (name.equals("add")) {
             try {
-                solar.load("SolarSystem");
-            }
-            catch (FileNotFoundException ex) { }
-            System.out.print(solar.getPlanets().size());
+                solar.addPlanet();
+            } catch (FileNotFoundException ex) { }
             frame.repaint();
         }
     }
