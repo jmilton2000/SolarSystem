@@ -12,12 +12,24 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import java.io.*;
+import java.awt.Graphics;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.util.*;
+
+
 public class SolarUI extends JFrame implements ActionListener {
 
-    public static void main(String[] args) {
+    Solar solar = new Solar();
+    JPanel panel = new JPanel();
+    JFrame frame = new JFrame();
 
-        SolarUI frame = new SolarUI();
-        frame.setVisible(true);
+    public static void main(String[] args) {
+        new SolarUI().setVisible(true);
+
+
+
     }
 
     private SolarUI() {
@@ -25,24 +37,45 @@ public class SolarUI extends JFrame implements ActionListener {
         super("Start Screen");
 
         //makes the size of the screen width by height
-        setSize(1000, 300);
+        setSize(1000, 500);
         setResizable(false);
 
         //When you close the frame, end code
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new FlowLayout());
+        setLayout(new GridLayout(5, 10));
 
-        /*
-        (this is for above)
-         FlowLayout
-         GridBagLayout
-         GridLayout (row,column)
-         BorderLayout ( add(button, BorderLayout.WEST)CENTER)
-         */
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setSize(1000, 200);
+
+
+        JPanel panel = new JPanel() {
+            @Override
+            public void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                g.setColor(Color.black);
+                g.fillRect(0, 0, 1000, 200);
+                if(solar.getPlanets().size() > 0) {
+                    g.setColor(Color.yellow);
+                    g.fillOval(100, 50, 80, 80);
+                }
+            }
+        };
+        frame.add(panel);
+        frame.validate();
+        frame.repaint();
+
+      /*
+      (this is for above)
+       FlowLayout
+       GridBagLayout
+       GridLayout (row,column)
+       BorderLayout ( add(button, BorderLayout.WEST)CENTER)
+       */
 
         //makes a new button
-        JButton loadButton = new JButton("blank1");
-        JButton CreateButton = new JButton("blank2");
+        JButton loadButton = new JButton("Edit Planet");
+        JButton CreateButton = new JButton("Add Planet");
 
         //menu bar
 
@@ -55,10 +88,11 @@ public class SolarUI extends JFrame implements ActionListener {
         JMenuItem exit = new JMenuItem("Exit");
 
         //closes shit
-        exit.addActionListener(actionEvent -> {
-            System.out.println("Closed");
-            System.exit(0);
-        });
+        exit.addActionListener(
+                actionEvent -> {
+                    System.out.println("Closed");
+                    System.exit(0);
+                });
 
         JMenuItem extra = new JMenu("Extra");
         JMenuItem hello = new JMenuItem("hey");
@@ -78,8 +112,8 @@ public class SolarUI extends JFrame implements ActionListener {
         setJMenuBar(bar);
 
         //makes the action listener parameters this
-        loadButton.setActionCommand("Test");
-        CreateButton.setActionCommand("Teeest");
+        loadButton.setActionCommand("edit");
+        CreateButton.setActionCommand("Load");
 
         //makes the button work
         loadButton.addActionListener(this);
@@ -89,8 +123,8 @@ public class SolarUI extends JFrame implements ActionListener {
         add(loadButton);
         add(CreateButton);
 
-        Drawing drawing = new Drawing();
-        add(drawing);
+        //add(drawing);
+
 
     }
 
@@ -98,14 +132,24 @@ public class SolarUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         String name = actionEvent.getActionCommand();
         //you can set .equals to .equalsIgnoreCase if want
-        if (name.equals("Test")) {
+        if (name.equals("edit")) {
             System.out.println("Good shit");
 
-        } else if (name.equals("Teeest")) {
+        }
+        else if (name.equals("add")) {
             System.out.println("Good job");
-        } else if (name.equalsIgnoreCase("exit")) {
+        }
+        else if (name.equalsIgnoreCase("exit")) {
             System.out.println("Closed");
             System.exit(0);
+        }
+        else if (name.equals("Load")) {
+            try {
+                solar.load("SolarSystem");
+            }
+            catch (FileNotFoundException ex) { }
+            System.out.print(solar.getPlanets().size());
+            frame.repaint();
         }
     }
 }
