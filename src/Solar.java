@@ -105,7 +105,12 @@ public class Solar {
 
     public void resetDis() {
         for (int A = 0; A < planets.size(); A++) {
-
+            Planet curr = planets.get(A);
+            if (A == 0) {
+                curr.setDistance((sunSize / 2) + 200 + (curr.getSize() / 2));
+            } else {
+                curr.setDistance(makeDistance(curr));
+            }
         }
     }
 }
