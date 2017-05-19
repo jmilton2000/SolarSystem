@@ -103,5 +103,9 @@ public class Solar {
         }
     }
 
-    //public
+    public void resetDis() {
+        for (int A = 0; A < planets.size(); A++) {
+
+        }
+    }
 }

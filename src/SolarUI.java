@@ -85,7 +85,7 @@ public class SolarUI extends JFrame implements ActionListener {
         //name of the tab on bar
         JMenu file = new JMenu("STUFF");
         //shit inside of menu in the tab
-        JMenuItem save = new JMenuItem("Save");
+        JMenuItem newP = new JMenuItem("New");
         JMenuItem load = new JMenuItem("Load");
         JMenuItem exit = new JMenuItem("Exit");
 
@@ -111,7 +111,7 @@ public class SolarUI extends JFrame implements ActionListener {
         JMenuItem hello2 = new JMenuItem("hey yo");
 
         //make the shit inside the tab
-        file.add(save);
+        file.add(newP);
         file.add(load);
         file.add(extra);
         file.addSeparator();
