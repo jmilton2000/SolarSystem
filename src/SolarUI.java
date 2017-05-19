@@ -55,7 +55,7 @@ public class SolarUI extends JFrame implements ActionListener {
                         g.fillRect(0, 0, 1000, 200);
                         g.setColor(Color.yellow);
                         g.fillOval(100, 50, 80, 80);
-                        for(int A = 0; A < solar.getPlanets().size(); A++) {
+                        for (int A = 0; A < solar.getPlanets().size(); A++) {
                             g.setColor(Color.blue);
                             int size = solar.getPlanets().get(A).getSize();
                             int distance = solar.getPlanets().get(A).getDistance();
@@ -94,8 +94,8 @@ public class SolarUI extends JFrame implements ActionListener {
                 actionEvent -> {
                     try {
                         solar.load("SolarSystem");
+                    } catch (FileNotFoundException ex) {
                     }
-                    catch (FileNotFoundException ex) { }
                     System.out.print(solar.getPlanets().size());
                     frame.repaint();
                 });
@@ -146,16 +146,14 @@ public class SolarUI extends JFrame implements ActionListener {
         //you can set .equals to .equalsIgnoreCase if want
         if (name.equals("edit")) {
             System.out.println("Good shit");
-
-        }
-        else if (name.equalsIgnoreCase("exit")) {
+        } else if (name.equalsIgnoreCase("exit")) {
             System.out.println("Closed");
             System.exit(0);
-        }
-        else if (name.equals("add")) {
+        } else if (name.equals("add")) {
             try {
                 solar.addPlanet();
-            } catch (FileNotFoundException ex) { }
+            } catch (FileNotFoundException ex) {
+            }
             frame.repaint();
         }
     }

@@ -15,15 +15,19 @@ public class Solar {
     public void setSunSize(int sunSize) {
         this.sunSize = sunSize;
     }
+
     public int getSunSize() {
         return sunSize;
     }
+
     public ArrayList<Planet> getPlanets() {
         return planets;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -54,20 +58,20 @@ public class Solar {
 
     public void addPlanet(String name, int size, int color, int distance) {
         Planet planet = new Planet();
-        planet.setName(name.replaceAll(" ", "_"));
-        planet.setDistance(makeDistance(planet));
+        planet.setName(name);
+        planet.setDistance(distance);
         planet.setSize(size);
         planet.setColor(color);
         planets.add(planet);
     }
 
     public void export() throws FileNotFoundException {
-        PrintStream output = new PrintStream(new File("save/" + name + ".sol"));
+        PrintStream output = new PrintStream(new File("src/save/" + name + ".sol"));
         output.println(planets.size());
         output.println(getSunSize());
         for(int A = 0; A < planets.size(); A++) {
             Planet planet = planets.get(A);
-            output.println(planet.getName());
+            output.println(planet.getName().replaceAll(" ", "_"));
             output.println((planet.getSize() - 20)/10);
             output.println(planet.getColor());
             output.println(planet.getDistance());
@@ -76,7 +80,7 @@ public class Solar {
 
     public void load(String name) throws FileNotFoundException {
         planets = new ArrayList<Planet>();
-        Scanner input = new Scanner(new File("save/" + name + ".sol"));
+        Scanner input = new Scanner(new File("src/save/" + name + ".sol"));
         this.name = name;
         int num = input.nextInt();
         sunSize = input.nextInt();
@@ -91,12 +95,13 @@ public class Solar {
     }
 
     public int makeDistance(Planet p) {
-        if(planets.size() == 0) {
-            return (sunSize/2) + 200 + (p.getSize()/2);
-        }
-        else {
+        if (planets.size() == 0) {
+            return (sunSize / 2) + 200 + (p.getSize() / 2);
+        } else {
             Planet pre = planets.get(planets.size() - 1);
-            return (pre.getSize()/2) + (pre.getDistance()) + 100 + (p.getSize()/2);
+            return (pre.getSize() / 2) + (pre.getDistance()) + 100 + (p.getSize() / 2);
         }
     }
+
+    //public
 }
