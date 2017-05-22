@@ -12,6 +12,7 @@ public class Solar {
         sunSize = 80;
     }
 
+    //getters and setters
     public void setSunSize(int sunSize) {
         this.sunSize = sunSize;
     }
@@ -32,6 +33,7 @@ public class Solar {
         this.name = name;
     }
 
+    //adds a planet to plaets array
     public void addPlanet() throws FileNotFoundException {
         int size = 0;
         String name = "planet " + (1 + planets.size());
@@ -42,6 +44,7 @@ public class Solar {
         export();
     }
 
+    //fines a planet by name
     public Planet findPlanet(String name) {
         int index = 0;
         if(planets.size() == 0) {
@@ -56,6 +59,7 @@ public class Solar {
         return planets.get(index);
     }
 
+    //adds a planet to plaets array (only used by load)
     public void addPlanet(String name, int size, int color, int distance) {
         Planet planet = new Planet();
         planet.setName(name);
@@ -65,6 +69,7 @@ public class Solar {
         planets.add(planet);
     }
 
+    //exports planets array into sol file
     public void export() throws FileNotFoundException {
         PrintStream output = new PrintStream(new File("src/save/" + name + ".sol"));
         output.println(planets.size());
@@ -78,6 +83,7 @@ public class Solar {
         }
     }
 
+    //loads a sol file in to planets array
     public void load(String name) throws FileNotFoundException {
         planets = new ArrayList<Planet>();
         Scanner input = new Scanner(new File("src/save/" + name + ".sol"));
@@ -94,6 +100,7 @@ public class Solar {
         }
     }
 
+    //createds distance for one planet
     public int makeDistance(Planet p) {
         if (planets.size() == 0) {
             return (sunSize / 2) + 200 + (p.getSize() / 2);
@@ -103,6 +110,7 @@ public class Solar {
         }
     }
 
+    //resets distances for all planets when one is removed
     public void resetDis() {
         for (int A = 0; A < planets.size(); A++) {
             Planet curr = planets.get(A);

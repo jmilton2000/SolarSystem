@@ -12,6 +12,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -46,7 +48,7 @@ public class SolarUI extends JFrame implements ActionListener {
         frame.setVisible(true);
         frame.setSize(1000, 200);
 
-
+        //sets up drawing panel
         JPanel panel =
                 new JPanel() {
                     @Override
@@ -90,26 +92,13 @@ public class SolarUI extends JFrame implements ActionListener {
         JMenuItem load = new JMenuItem("Load");
         JMenuItem exit = new JMenuItem("Exit");
 
-        //closes shit
+        //loads sol file
         load.addActionListener(
                 actionEvent -> {
-                    JFrame f = new JFrame("Please enter System Name");
-                    f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                    f.getContentPane().setLayout(new FlowLayout());
-                    JTextField field = new JTextField(20);
-                    f.add(field);
-                    f.pack();
-                    f.setVisible(true);
-
-
-                    try {
-                        solar.load("SolarSystem");
-                    } catch (FileNotFoundException ex) {
-                    }
-                    System.out.print(solar.getPlanets().size());
-                    frame.repaint();
+                    load();
                 });
 
+        //closes program
         exit.addActionListener(
                 actionEvent -> {
                     System.out.println("Closed");
@@ -145,9 +134,6 @@ public class SolarUI extends JFrame implements ActionListener {
         add(loadButton);
         add(CreateButton);
 
-        //add(drawing);
-
-
     }
 
     @Override
@@ -165,6 +151,35 @@ public class SolarUI extends JFrame implements ActionListener {
             } catch (FileNotFoundException ex) {
             }
             frame.repaint();
+        } else if (name.equals("e")) {
+
         }
     }
+
+    //for loading
+    public void load() {
+        JFrame f = new JFrame("Please enter System Name");
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        f.getContentPane().setLayout(new FlowLayout());
+        JTextField field = new JTextField(20);
+        f.add(field);
+        f.pack();
+        f.setVisible(true);
+        field.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    String name = field.getText();
+                    try {
+                        solar.load(name);
+                    } catch (FileNotFoundException ex) {
+                    }
+                    System.out.print(solar.getPlanets().size());
+                    frame.repaint();
+                }
+            }
+        });
+    }
+
+
 }
