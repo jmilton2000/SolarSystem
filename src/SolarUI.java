@@ -18,7 +18,7 @@ import java.io.*;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 import java.awt.Color;
-import java.util.*;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 
@@ -59,7 +59,9 @@ public class SolarUI extends JFrame implements ActionListener {
                         g.setColor(Color.yellow);
                         g.fillOval(100, 50, 80, 80);
                         for (int A = 0; A < solar.getPlanets().size(); A++) {
-                            g.setColor(Color.blue);
+                            if(solar.getPlanets().get(A).getColor() == 1) {g.setColor(Color.red);}
+                            if(solar.getPlanets().get(A).getColor() == 2) {g.setColor(Color.green);}
+                            if(solar.getPlanets().get(A).getColor() == 3) {g.setColor(Color.blue);}
                             int size = solar.getPlanets().get(A).getSize();
                             int distance = solar.getPlanets().get(A).getDistance();
                             g.fillOval(distance, 100 + 10 - size, size, size);
@@ -96,6 +98,11 @@ public class SolarUI extends JFrame implements ActionListener {
         load.addActionListener(
                 actionEvent -> {
                     load();
+                });
+
+        newP.addActionListener(
+                actionEvent -> {
+                    New();
                 });
 
         //closes program
@@ -141,15 +148,14 @@ public class SolarUI extends JFrame implements ActionListener {
         String name = actionEvent.getActionCommand();
         //you can set .equals to .equalsIgnoreCase if want
         if (name.equals("edit")) {
-            System.out.println("Good shit");
+            edit();
         } else if (name.equalsIgnoreCase("exit")) {
             System.out.println("Closed");
             System.exit(0);
         } else if (name.equals("add")) {
             try {
                 solar.addPlanet();
-            } catch (FileNotFoundException ex) {
-            }
+            } catch (FileNotFoundException ex) {}
             frame.repaint();
         } else if (name.equals("e")) {
 
@@ -170,16 +176,108 @@ public class SolarUI extends JFrame implements ActionListener {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     String name = field.getText();
+                    solar.setName(name);
                     try {
                         solar.load(name);
-                    } catch (FileNotFoundException ex) {
-                    }
-                    System.out.print(solar.getPlanets().size());
+                    } catch (FileNotFoundException ex) {}
                     frame.repaint();
+                    f.dispose();
                 }
             }
         });
     }
 
+    public void New() {
+        JFrame f = new JFrame("Please enter System Name");
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        f.getContentPane().setLayout(new FlowLayout());
+        JTextField field = new JTextField(20);
+        f.add(field);
+        f.pack();
+        f.setVisible(true);
+        field.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    String name = field.getText();
+                    solar = new Solar();
+                    solar.setName(name);
+                    try {
+                        solar.export();
+                    } catch (FileNotFoundException ex) {}
+                    frame.repaint();
+                    f.dispose();
+                }
+            }
+        });
+    }
 
+    public void edit() {
+        JFrame f = new JFrame("Please enter Planet Name");
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        f.getContentPane().setLayout(new FlowLayout());
+        JTextField field = new JTextField(20);
+        f.add(field);
+        f.pack();
+        f.setVisible(true);
+        field.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    String name = field.getText();
+                    Planet planet = solar.findPlanet(name);
+                    f.dispose();
+                    edit2(planet);
+                }
+            }
+        });
+
+    }
+
+    public void edit2(Planet planet) {
+        JFrame f = new JFrame("Please enter Planet Info");
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        f.getContentPane().setLayout(new GridLayout(4, 2));
+
+        JTextField f1 = new JTextField(20);
+        JTextField f2 = new JTextField(20);
+        JTextField f3 = new JTextField(20);
+
+        JLabel L1 = new JLabel();
+        JLabel L2 = new JLabel();
+        JLabel L3 = new JLabel();
+
+        L1.setText("Name:");
+        L1.setText("Size:");
+        L1.setText("Color:");
+
+        //f.add(L1);
+        f.add(f1);
+        //f.add(L2);
+        f.add(f2);
+        //f.add(L3);
+        f.add(f3);
+
+        f.pack();
+        f.setVisible(true);
+
+        KeyAdapter enter = new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    planet.setName(f1.getText());
+                    planet.setSize(Integer.parseInt(f2.getText()));
+                    planet.setColor(Integer.parseInt(f3.getText()));
+                    frame.repaint();
+                    try {
+                        solar.export();
+                    } catch (FileNotFoundException ex) {}
+                }
+            }
+        };
+
+        f1.addKeyListener(enter);
+        f2.addKeyListener(enter);
+        f3.addKeyListener(enter);
+    }
 }
