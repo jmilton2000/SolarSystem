@@ -59,12 +59,21 @@ public class SolarUI extends JFrame implements ActionListener {
                         g.setColor(Color.yellow);
                         g.fillOval(100, solar.getSunSize()/3, solar.getSunSize(), solar.getSunSize());
                         for (int A = 0; A < solar.getPlanets().size(); A++) {
-                            if(solar.getPlanets().get(A).getColor() == 1) {g.setColor(Color.red);}
-                            if(solar.getPlanets().get(A).getColor() == 2) {g.setColor(Color.green);}
-                            if(solar.getPlanets().get(A).getColor() == 3) {g.setColor(Color.blue);}
-                            int size = solar.getPlanets().get(A).getSizeReal();
-                            int distance = solar.getPlanets().get(A).getDistance();
+                            Planet curr = solar.getPlanets().get(A);
+                            if (curr.getColor() <= 1) {
+                                g.setColor(Color.red);
+                            }
+                            if (curr.getColor() == 2) {
+                                g.setColor(Color.green);
+                            }
+                            if (curr.getColor() >= 3) {
+                                g.setColor(Color.blue);
+                            }
+                            int size = curr.getSizeReal();
+                            int distance = curr.getDistance();
                             g.fillOval(distance, 100 + 10 - size, size, size);
+                            g.setColor(Color.white);
+                            g.drawString(curr.getName(), curr.getDistance(), 50);
                         }
                     }
                 };
@@ -268,7 +277,15 @@ public class SolarUI extends JFrame implements ActionListener {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     planet.setName(f1.getText());
-                    planet.setSize(Integer.parseInt(f2.getText()));
+                    int size;
+                    if (Integer.parseInt(f2.getText()) > 4) {
+                        size = 4;
+                    } else if (Integer.parseInt(f2.getText()) < 1) {
+                        size = 1;
+                    } else {
+                        size = Integer.parseInt(f2.getText());
+                    }
+                    planet.setSize(size);
                     planet.setColor(Integer.parseInt(f3.getText()));
                     solar.resetDis();
                     frame.repaint();
