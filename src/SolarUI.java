@@ -73,7 +73,7 @@ public class SolarUI extends JFrame implements ActionListener {
                             int distance = curr.getDistance();
                             g.fillOval(distance, 100 + 10 - size, size, size);
                             g.setColor(Color.white);
-                            g.drawString(curr.getName(), curr.getDistance(), 50);
+                            g.drawString(curr.getName(), curr.getDistance(), 30);
                         }
                     }
                 };
