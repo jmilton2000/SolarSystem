@@ -9,7 +9,7 @@ public class Solar {
 
     public Solar() {
         name = "SolarSystem";
-        sunSize = 80;
+        sunSize = 100;
     }
 
     //getters and setters
@@ -75,7 +75,7 @@ public class Solar {
         for(int A = 0; A < planets.size(); A++) {
             Planet planet = planets.get(A);
             output.println(planet.getName().replaceAll(" ", "_"));
-            output.println((planet.getSize() - 20)/10);
+            output.println(planet.getSize());
             output.println(planet.getColor());
             output.println(planet.getDistance());
         }
@@ -101,10 +101,10 @@ public class Solar {
     //createds distance for one planet
     public int makeDistance(Planet p) {
         if (planets.size() == 0) {
-            return (sunSize / 2) + 200 + (p.getSize() / 2);
+            return (sunSize / 2) + 200 + (p.getSizeReal() / 2);
         } else {
             Planet pre = planets.get(planets.size() - 1);
-            return (pre.getSize() / 2) + (pre.getDistance()) + 100 + (p.getSize() / 2);
+            return (pre.getSizeReal() / 2) + (pre.getDistance()) + 100 + (p.getSizeReal() / 2);
         }
     }
 
@@ -113,7 +113,7 @@ public class Solar {
         for (int A = 0; A < planets.size(); A++) {
             Planet curr = planets.get(A);
             if (A == 0) {
-                curr.setDistance((sunSize / 2) + 200 + (curr.getSize() / 2));
+                curr.setDistance((sunSize / 2) + 200 + (curr.getSizeReal() / 2));
             } else {
                 curr.setDistance(makeDistance(curr));
             }

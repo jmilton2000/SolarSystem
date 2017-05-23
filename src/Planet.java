@@ -15,7 +15,8 @@ public class Planet {
 
     //geters and seters
     public String getName() { return name; }
-    public int getSize() { return size; }
+    public int getSize() { return (size - 20 )/ 10; }
+    public int getSizeReal() { return size; }
     public boolean getHasLife() { return hasLife; }
     public int getDistance() { return distance; }
     public int getColor() { return color; }

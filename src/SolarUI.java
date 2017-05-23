@@ -57,12 +57,12 @@ public class SolarUI extends JFrame implements ActionListener {
                         g.setColor(Color.black);
                         g.fillRect(0, 0, 1000, 200);
                         g.setColor(Color.yellow);
-                        g.fillOval(100, 50, 80, 80);
+                        g.fillOval(100, solar.getSunSize()/3, solar.getSunSize(), solar.getSunSize());
                         for (int A = 0; A < solar.getPlanets().size(); A++) {
                             if(solar.getPlanets().get(A).getColor() == 1) {g.setColor(Color.red);}
                             if(solar.getPlanets().get(A).getColor() == 2) {g.setColor(Color.green);}
                             if(solar.getPlanets().get(A).getColor() == 3) {g.setColor(Color.blue);}
-                            int size = solar.getPlanets().get(A).getSize();
+                            int size = solar.getPlanets().get(A).getSizeReal();
                             int distance = solar.getPlanets().get(A).getDistance();
                             g.fillOval(distance, 100 + 10 - size, size, size);
                         }
@@ -239,24 +239,27 @@ public class SolarUI extends JFrame implements ActionListener {
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new GridLayout(4, 2));
 
-        JTextField f1 = new JTextField(20);
-        JTextField f2 = new JTextField(20);
-        JTextField f3 = new JTextField(20);
+        JButton remove = new JButton("Remove Planet");
+
+        JTextField f1 = new JTextField(planet.getName());
+        JTextField f2 = new JTextField(Integer.toString(planet.getSize()));
+        JTextField f3 = new JTextField(Integer.toString(planet.getColor()));
 
         JLabel L1 = new JLabel();
         JLabel L2 = new JLabel();
         JLabel L3 = new JLabel();
 
         L1.setText("Name:");
-        L1.setText("Size:");
-        L1.setText("Color:");
+        L2.setText("Size:");
+        L3.setText("Color:");
 
-        //f.add(L1);
+        f.add(L1);
         f.add(f1);
-        //f.add(L2);
+        f.add(L2);
         f.add(f2);
-        //f.add(L3);
+        f.add(L3);
         f.add(f3);
+        //f.add(remove);
 
         f.pack();
         f.setVisible(true);
