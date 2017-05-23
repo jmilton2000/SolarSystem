@@ -278,6 +278,7 @@ public class SolarUI extends JFrame implements ActionListener {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     planet.setName(f1.getText());
                     int size;
+                    int color = 1;
                     if (Integer.parseInt(f2.getText()) > 4) {
                         size = 4;
                     } else if (Integer.parseInt(f2.getText()) < 1) {
@@ -285,8 +286,15 @@ public class SolarUI extends JFrame implements ActionListener {
                     } else {
                         size = Integer.parseInt(f2.getText());
                     }
+                    if (f3.getText().charAt(0) == 18 || f3.getText().charAt(0) == 114) {
+                        color = 1;
+                    } else if (f3.getText().charAt(0) == 7 || f3.getText().charAt(0) == 103) {
+                        color = 2;
+                    } else if (f3.getText().charAt(0) == 2 || f3.getText().charAt(0) == 98) {
+                        color = 3;
+                    }
                     planet.setSize(size);
-                    planet.setColor(Integer.parseInt(f3.getText()));
+                    planet.setColor(color);
                     solar.resetDis();
                     frame.repaint();
                     try {
