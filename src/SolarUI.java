@@ -271,6 +271,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     planet.setName(f1.getText());
                     planet.setSize(Integer.parseInt(f2.getText()));
                     planet.setColor(Integer.parseInt(f3.getText()));
+                    solar.resetDis();
                     frame.repaint();
                     try {
                         solar.export();

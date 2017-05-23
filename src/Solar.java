@@ -115,7 +115,8 @@ public class Solar {
             if (A == 0) {
                 curr.setDistance((sunSize / 2) + 200 + (curr.getSizeReal() / 2));
             } else {
-                curr.setDistance(makeDistance(curr));
+                Planet pre = planets.get(A - 1);
+                curr.setDistance((pre.getSizeReal() / 2) + (pre.getDistance()) + 100 + (curr.getSizeReal() / 2));
             }
         }
     }
