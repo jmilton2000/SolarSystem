@@ -157,8 +157,6 @@ public class SolarUI extends JFrame implements ActionListener {
                 solar.addPlanet();
             } catch (FileNotFoundException ex) {}
             frame.repaint();
-        } else if (name.equals("e")) {
-
         }
     }
 
@@ -240,6 +238,7 @@ public class SolarUI extends JFrame implements ActionListener {
         f.getContentPane().setLayout(new GridLayout(4, 2));
 
         JButton remove = new JButton("Remove Planet");
+        remove.setActionCommand("remove");
 
         JTextField f1 = new JTextField(planet.getName());
         JTextField f2 = new JTextField(Integer.toString(planet.getSize()));
@@ -250,8 +249,8 @@ public class SolarUI extends JFrame implements ActionListener {
         JLabel L3 = new JLabel();
 
         L1.setText("Name:");
-        L2.setText("Size:");
-        L3.setText("Color:");
+        L2.setText("Size (1,2,3,4):");
+        L3.setText("Color (RGB):");
 
         f.add(L1);
         f.add(f1);
@@ -259,7 +258,7 @@ public class SolarUI extends JFrame implements ActionListener {
         f.add(f2);
         f.add(L3);
         f.add(f3);
-        //f.add(remove);
+        f.add(remove);
 
         f.pack();
         f.setVisible(true);
@@ -283,5 +282,16 @@ public class SolarUI extends JFrame implements ActionListener {
         f1.addKeyListener(enter);
         f2.addKeyListener(enter);
         f3.addKeyListener(enter);
+        remove.addActionListener(
+                actionEvent -> {
+                    solar.getPlanets().remove(planet);
+                    solar.resetDis();
+                    frame.repaint();
+                    f.dispose();
+                    try {
+                        solar.export();
+                    } catch (FileNotFoundException ex) {
+                    }
+                });
     }
 }
