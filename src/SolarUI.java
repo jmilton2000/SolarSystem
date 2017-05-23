@@ -37,12 +37,12 @@ public class SolarUI extends JFrame implements ActionListener {
         super("Start Screen");
 
         //makes the size of the screen width by height
-        setSize(1000, 500);
+        setSize(400, 200);
         setResizable(false);
 
         //When you close the frame, end code )
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLayout(new GridLayout(5, 10));
+        setLayout(new GridLayout(2, 0));
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -88,7 +88,7 @@ public class SolarUI extends JFrame implements ActionListener {
 
         JMenuBar bar = new JMenuBar();
         //name of the tab on bar
-        JMenu file = new JMenu("STUFF");
+        JMenu file = new JMenu("Menu");
         //shit inside of menu in the tab
         JMenuItem newP = new JMenuItem("New");
         JMenuItem load = new JMenuItem("Load");
