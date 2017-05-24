@@ -33,13 +33,15 @@ public class Solar {
 
     //adds a planet to plaets array
     public void addPlanet() throws FileNotFoundException {
-        int size = 0;
-        String name = "planet " + (1 + planets.size());
-        Planet planet = new Planet();
-        planet.setDistance(makeDistance(planet));
-        planet.setName(name);
-        planets.add(planet);
-        export();
+        if (planets.size() != 6) {
+            int size = 0;
+            String name = "planet " + (1 + planets.size());
+            Planet planet = new Planet();
+            planet.setDistance(makeDistance(planet));
+            planet.setName(name);
+            planets.add(planet);
+            export();
+        }
     }
 
     //fines a planet by name
