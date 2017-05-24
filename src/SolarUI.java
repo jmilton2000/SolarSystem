@@ -316,6 +316,7 @@ public class SolarUI extends JFrame implements ActionListener {
                         solar.export();
                     } catch (FileNotFoundException ex) {
                     }
+                    solar.rename();
                 });
     }
 }
