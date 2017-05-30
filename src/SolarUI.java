@@ -281,7 +281,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     }
                     double temp = Double.parseDouble(f2.getText());
                     int size = (int) temp;
-                    String color = "";
+                    String color = "R";
                     if (size > 4) {
                         size = 4;
                     } else if (size < 1) {
