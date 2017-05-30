@@ -60,13 +60,13 @@ public class SolarUI extends JFrame implements ActionListener {
                         g.fillOval(100, solar.getSunSize()/3, solar.getSunSize(), solar.getSunSize());
                         for (int A = 0; A < solar.getPlanets().size(); A++) {
                             Planet curr = solar.getPlanets().get(A);
-                            if (curr.getColor().equals("r")) {
+                            if (curr.getColor().equals("R")) {
                                 g.setColor(Color.red);
                             }
-                            if (curr.getColor().equals("g")) {
+                            if (curr.getColor().equals("G")) {
                                 g.setColor(Color.green);
                             }
-                            if (curr.getColor().equals("b")) {
+                            if (curr.getColor().equals("B")) {
                                 g.setColor(Color.blue);
                             }
                             int size = curr.getSizeReal();
@@ -289,11 +289,11 @@ public class SolarUI extends JFrame implements ActionListener {
                         size = 1;
                     }
                     if (f3.getText().charAt(0) == 18 || f3.getText().charAt(0) == 114) {
-                        color = "r";
+                        color = "R";
                     } else if (f3.getText().charAt(0) == 7 || f3.getText().charAt(0) == 103) {
-                        color = "g";
+                        color = "G";
                     } else if (f3.getText().charAt(0) == 2 || f3.getText().charAt(0) == 98) {
-                        color = "b";
+                        color = "B";
                     }
                     planet.setSize(size);
                     planet.setColor(color);
