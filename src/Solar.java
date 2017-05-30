@@ -60,7 +60,7 @@ public class Solar {
     }
 
     //adds a planet to plaets array (only used by load)
-    public void addPlanet(String name, int size, int color, int distance) {
+    public void addPlanet(String name, int size, String color, int distance) {
         Planet planet = new Planet();
         planet.setName(name);
         planet.setDistance(distance);
@@ -94,7 +94,7 @@ public class Solar {
             String pName = input.next();
             pName = pName.replaceAll("_", " ");
             int size = input.nextInt();
-            int color = input.nextInt();
+            String color = input.next();
             int distance = input.nextInt();
             addPlanet(pName, size, color, distance);
         }
@@ -128,6 +128,15 @@ public class Solar {
             if (planets.get(A).getName().contains("planet")) {
                 planets.get(A).setName("planet " + (A + 1));
             }
+        }
+    }
+
+    public boolean allready(String p) {
+        Planet p2 = this.findPlanet(p);
+        if (p.equals(p2.getName())) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

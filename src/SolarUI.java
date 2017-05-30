@@ -60,13 +60,13 @@ public class SolarUI extends JFrame implements ActionListener {
                         g.fillOval(100, solar.getSunSize()/3, solar.getSunSize(), solar.getSunSize());
                         for (int A = 0; A < solar.getPlanets().size(); A++) {
                             Planet curr = solar.getPlanets().get(A);
-                            if (curr.getColor() <= 1) {
+                            if (curr.getColor().equals("r")) {
                                 g.setColor(Color.red);
                             }
-                            if (curr.getColor() == 2) {
+                            if (curr.getColor().equals("g")) {
                                 g.setColor(Color.green);
                             }
-                            if (curr.getColor() >= 3) {
+                            if (curr.getColor().equals("b")) {
                                 g.setColor(Color.blue);
                             }
                             int size = curr.getSizeReal();
@@ -251,7 +251,7 @@ public class SolarUI extends JFrame implements ActionListener {
 
         JTextField f1 = new JTextField(planet.getName());
         JTextField f2 = new JTextField(Integer.toString(planet.getSize()));
-        JTextField f3 = new JTextField(Integer.toString(planet.getColor()));
+        JTextField f3 = new JTextField(planet.getColor());
 
         JLabel L1 = new JLabel();
         JLabel L2 = new JLabel();
@@ -276,21 +276,24 @@ public class SolarUI extends JFrame implements ActionListener {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                    planet.setName(f1.getText());
+                    if (solar.allready(f1.getText())) {
+                    } else {
+                        planet.setName(f1.getText());
+                    }
                     double temp = Double.parseDouble(f2.getText());
                     int size = (int) temp;
-                    int color = 1;
+                    String color = "";
                     if (size > 4) {
                         size = 4;
                     } else if (size < 1) {
                         size = 1;
                     }
                     if (f3.getText().charAt(0) == 18 || f3.getText().charAt(0) == 114) {
-                        color = 1;
+                        color = "r";
                     } else if (f3.getText().charAt(0) == 7 || f3.getText().charAt(0) == 103) {
-                        color = 2;
+                        color = "g";
                     } else if (f3.getText().charAt(0) == 2 || f3.getText().charAt(0) == 98) {
-                        color = 3;
+                        color = "b";
                     }
                     planet.setSize(size);
                     planet.setColor(color);
