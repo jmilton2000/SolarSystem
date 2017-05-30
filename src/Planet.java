@@ -1,4 +1,3 @@
-import java.awt.*;
 public class Planet {
     private String name; //defalt is Planet
     private int size; //size are 30, 40, 50, 60 (defalt = 30)
@@ -9,7 +8,7 @@ public class Planet {
     public Planet() {
         hasLife = false;
         name = "Planet";
-        color = "r"; //this may be changed later
+        color = "R"; //this may be changed later
         size = 30;
     }
 

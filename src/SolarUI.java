@@ -1,7 +1,3 @@
-/**
- * Created by ros_rcsoyama on 5/11/2017.
- */
-
 import javax.swing.*;
 
 import java.awt.*;
@@ -60,13 +56,16 @@ public class SolarUI extends JFrame implements ActionListener {
                         g.fillOval(100, solar.getSunSize()/3, solar.getSunSize(), solar.getSunSize());
                         for (int A = 0; A < solar.getPlanets().size(); A++) {
                             Planet curr = solar.getPlanets().get(A);
-                            if (curr.getColor().equals("R")) {
+                            g.setColor(Color.red);
+                            String color = curr.getColor();
+                            color.toUpperCase();
+                            if (color.equals("R")) {
                                 g.setColor(Color.red);
                             }
-                            if (curr.getColor().equals("G")) {
+                            if (color.equals("G")) {
                                 g.setColor(Color.green);
                             }
-                            if (curr.getColor().equals("B")) {
+                            if (color.equals("B")) {
                                 g.setColor(Color.blue);
                             }
                             int size = curr.getSizeReal();
