@@ -156,7 +156,9 @@ public class SolarUI extends JFrame implements ActionListener {
         String name = actionEvent.getActionCommand();
         //you can set .equals to .equalsIgnoreCase if want
         if (name.equals("edit")) {
-            edit();
+            if (solar.getPlanets().size() != 0) {
+                edit();
+            }
         } else if (name.equalsIgnoreCase("exit")) {
             System.out.println("Closed");
             System.exit(0);
