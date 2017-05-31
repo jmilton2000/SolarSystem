@@ -215,7 +215,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     File file = new File("src/save/" + solar.getName() + ".sol");
                     if (!file.exists()) {
                         try {
-                            solar.export(file);
+                            solar.export();
                         } catch (FileNotFoundException ex) {
                         }
                         frame.repaint();
