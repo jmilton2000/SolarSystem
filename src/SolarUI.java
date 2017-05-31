@@ -275,6 +275,15 @@ public class SolarUI extends JFrame implements ActionListener {
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (f1.getText().equals("")) {
+                        f1.setText(planet.getName());
+                    }
+                    if (f2.getText().equals("")) {
+                        f2.setText(Integer.toString(planet.getSize()));
+                    }
+                    if (f3.getText().equals("")) {
+                        f3.setText(planet.getColor());
+                    }
                     if (solar.allready(f1.getText())) {
                     } else {
                         planet.setName(f1.getText());
