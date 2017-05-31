@@ -39,7 +39,8 @@ public class Solar {
             planet.setDistance(makeDistance(planet));
             planet.setName(name);
             planets.add(planet);
-            export();
+            File file = new File("src/save/" + name + ".sol")
+            export(file);
         }
     }
 
@@ -69,8 +70,8 @@ public class Solar {
     }
 
     //exports planets array into sol file
-    public void export() throws FileNotFoundException {
-        PrintStream output = new PrintStream(new File("src/save/" + name + ".sol"));
+    public void export(File file) throws FileNotFoundException {
+        PrintStream output = new PrintStream(file);
         output.println(planets.size());
         output.println(getSunSize());
         for(int A = 0; A < planets.size(); A++) {

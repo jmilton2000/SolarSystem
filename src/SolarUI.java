@@ -157,7 +157,7 @@ public class SolarUI extends JFrame implements ActionListener {
         String name = actionEvent.getActionCommand();
         //you can set .equals to .equalsIgnoreCase if want
         if (name.equals("edit")) {
-            if (solar.getPlanets().size() != 0 && f.isVisible() != true) {
+            if (solar.getPlanets().size() != 0 && !f.isVisible()) {
                 edit();
             }
         } else if (name.equalsIgnoreCase("exit")) {
@@ -212,12 +212,17 @@ public class SolarUI extends JFrame implements ActionListener {
                     String name = field.getText();
                     solar = new Solar();
                     solar.setName(name);
-                    try {
-                        solar.export();
-                    } catch (FileNotFoundException ex) {}
-                    frame.repaint();
-                    f.dispose();
-                    setTitle(solar.getName());
+                    File file = new File("src/save/" + solar.getName() + ".sol");
+                    if (!file.exists()) {
+                        try {
+                            solar.export(file);
+                        } catch (FileNotFoundException ex) {
+                        }
+                        frame.repaint();
+                        f.dispose();
+                        setTitle(solar.getName());
+                    }
+
                 }
             }
         });
