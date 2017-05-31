@@ -21,8 +21,8 @@ import javax.swing.JTextField;
 public class SolarUI extends JFrame implements ActionListener {
 
     Solar solar = new Solar();
-    JPanel panel = new JPanel();
     JFrame frame = new JFrame();
+    JFrame f = new JFrame();
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
@@ -30,7 +30,7 @@ public class SolarUI extends JFrame implements ActionListener {
 
     private SolarUI() {
         //name of the screen
-        super("Start Screen");
+        setTitle(solar.getName());
 
         //makes the size of the screen width by height
         setSize(400, 200);
@@ -49,6 +49,7 @@ public class SolarUI extends JFrame implements ActionListener {
                 new JPanel() {
                     @Override
                     public void paintComponent(Graphics g) {
+                        setTitle(solar.getName());
                         super.paintComponent(g);
                         g.setColor(Color.black);
                         g.fillRect(0, 0, 1000, 200);
@@ -156,7 +157,7 @@ public class SolarUI extends JFrame implements ActionListener {
         String name = actionEvent.getActionCommand();
         //you can set .equals to .equalsIgnoreCase if want
         if (name.equals("edit")) {
-            if (solar.getPlanets().size() != 0) {
+            if (solar.getPlanets().size() != 0 && f.isVisible() != true) {
                 edit();
             }
         } else if (name.equalsIgnoreCase("exit")) {
@@ -172,7 +173,7 @@ public class SolarUI extends JFrame implements ActionListener {
 
     //for loading
     public void load() {
-        JFrame f = new JFrame("Please enter System Name");
+        f = new JFrame("Please enter System Name");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new FlowLayout());
         JTextField field = new JTextField(20);
@@ -190,13 +191,14 @@ public class SolarUI extends JFrame implements ActionListener {
                     } catch (FileNotFoundException ex) {}
                     frame.repaint();
                     f.dispose();
+                    setTitle(solar.getName());
                 }
             }
         });
     }
 
     public void New() {
-        JFrame f = new JFrame("Please enter System Name");
+        f = new JFrame("Please enter System Name");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new FlowLayout());
         JTextField field = new JTextField(20);
@@ -215,13 +217,14 @@ public class SolarUI extends JFrame implements ActionListener {
                     } catch (FileNotFoundException ex) {}
                     frame.repaint();
                     f.dispose();
+                    setTitle(solar.getName());
                 }
             }
         });
     }
 
     public void edit() {
-        JFrame f = new JFrame("Please enter Planet Name");
+        f = new JFrame("Please enter Planet Name");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new FlowLayout());
         JTextField field = new JTextField(20);
@@ -243,7 +246,7 @@ public class SolarUI extends JFrame implements ActionListener {
     }
 
     public void edit2(Planet planet) {
-        JFrame f = new JFrame("Please enter Planet Info");
+        f = new JFrame("Please enter Planet Info");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new GridLayout(4, 2));
 
