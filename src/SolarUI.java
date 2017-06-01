@@ -106,12 +106,16 @@ public class SolarUI extends JFrame implements ActionListener {
         //loads sol file
         load.addActionListener(
                 actionEvent -> {
-                    load();
+                    if (!f.isVisible()) {
+                        load();
+                    }
                 });
 
         newP.addActionListener(
                 actionEvent -> {
-                    New();
+                    if (!f.isVisible()) {
+                        New();
+                    }
                 });
 
         //closes program
@@ -222,7 +226,6 @@ public class SolarUI extends JFrame implements ActionListener {
                         f.dispose();
                         setTitle(solar.getName());
                     }
-
                 }
             }
         });
