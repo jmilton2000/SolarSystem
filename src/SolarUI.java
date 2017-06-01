@@ -57,7 +57,7 @@ public class SolarUI extends JFrame implements ActionListener {
                         g.fillOval(100, solar.getSunSize()/3, solar.getSunSize(), solar.getSunSize());
                         for (int A = 0; A < solar.getPlanets().size(); A++) {
                             Planet curr = solar.getPlanets().get(A);
-                            g.setColor(Color.red);
+                            //g.setColor(Color.red);
                             String color = curr.getColor();
                             color.toUpperCase();
                             if (color.equals("R")) {
@@ -209,6 +209,7 @@ public class SolarUI extends JFrame implements ActionListener {
         f.add(field);
         f.pack();
         f.setVisible(true);
+        JButton over = new JButton("Replace existing file?");
         field.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -225,6 +226,19 @@ public class SolarUI extends JFrame implements ActionListener {
                         frame.repaint();
                         f.dispose();
                         setTitle(solar.getName());
+                    } else {
+                        f.add(over);
+                        f.repaint();
+                        over.addActionListener(
+                                actionEvent -> {
+                                    try {
+                                        solar.export();
+                                    } catch (FileNotFoundException ex) {
+                                    }
+                                    frame.repaint();
+                                    f.dispose();
+                                    setTitle(solar.getName());
+                                });
                     }
                 }
             }
@@ -309,11 +323,11 @@ public class SolarUI extends JFrame implements ActionListener {
                     } else if (size < 1) {
                         size = 1;
                     }
-                    if (f3.getText().charAt(0) == 18 || f3.getText().charAt(0) == 114) {
+                    if (f3.getText().startsWith("r") || f3.getText().startsWith("R")) {
                         color = "R";
-                    } else if (f3.getText().charAt(0) == 7 || f3.getText().charAt(0) == 103) {
+                    } else if (f3.getText().startsWith("g") || f3.getText().startsWith("G")) {
                         color = "G";
-                    } else if (f3.getText().charAt(0) == 2 || f3.getText().charAt(0) == 98) {
+                    } else if (f3.getText().startsWith("b") || f3.getText().startsWith("B")) {
                         color = "B";
                     }
                     planet.setSize(size);
