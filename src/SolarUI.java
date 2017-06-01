@@ -23,7 +23,6 @@ public class SolarUI extends JFrame implements ActionListener {
     Solar solar = new Solar();
     JFrame frame = new JFrame();
     JFrame f = new JFrame();
-    JPanel panel;
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
@@ -32,9 +31,11 @@ public class SolarUI extends JFrame implements ActionListener {
     private SolarUI() {
         //name of the screen
         setTitle(solar.getName());
-        //makes the size of the screen width by height
+
+        //makes the size of the screen width by height4
         setSize(400, 200);
         setResizable(false);
+
         //When you close the frame, end code )
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new GridLayout(2, 0));
@@ -44,9 +45,11 @@ public class SolarUI extends JFrame implements ActionListener {
         frame.setSize(1000, 200);
 
         //sets up drawing panel
-        panel = new JPanel() {
+        JPanel panel =
+                new JPanel() {
                     @Override
                     public void paintComponent(Graphics g) {
+                        setTitle(solar.getName());
                         super.paintComponent(g);
                         g.setColor(Color.black);
                         g.fillRect(0, 0, getWidth(), getHeight());
@@ -235,7 +238,7 @@ public class SolarUI extends JFrame implements ActionListener {
                         setTitle(solar.getName());
                     } else {
                         f.add(over);
-                        f.pack();
+                        over.setVisible(true);
                     }
                 }
             }
