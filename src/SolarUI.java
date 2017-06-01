@@ -52,7 +52,7 @@ public class SolarUI extends JFrame implements ActionListener {
                         setTitle(solar.getName());
                         super.paintComponent(g);
                         g.setColor(Color.black);
-                        g.fillRect(0, 0, 1000, 200);
+                        g.fillRect(0, 0, getWidth(), getHeight());
                         g.setColor(Color.yellow);
                         g.fillOval(100, solar.getSunSize()/3, solar.getSunSize(), solar.getSunSize());
                         for (int A = 0; A < solar.getPlanets().size(); A++) {
@@ -172,6 +172,14 @@ public class SolarUI extends JFrame implements ActionListener {
                 solar.addPlanet();
             } catch (FileNotFoundException ex) {}
             frame.repaint();
+        } else if (name.equals("over")) {
+            try {
+                solar.export();
+            } catch (FileNotFoundException ex) {
+            }
+            frame.repaint();
+            f.dispose();
+            setTitle(solar.getName());
         }
     }
 
@@ -210,6 +218,8 @@ public class SolarUI extends JFrame implements ActionListener {
         f.pack();
         f.setVisible(true);
         JButton over = new JButton("Replace existing file?");
+        over.setActionCommand("over");
+        over.addActionListener(this);
         field.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -228,17 +238,7 @@ public class SolarUI extends JFrame implements ActionListener {
                         setTitle(solar.getName());
                     } else {
                         f.add(over);
-                        f.repaint();
-                        over.addActionListener(
-                                actionEvent -> {
-                                    try {
-                                        solar.export();
-                                    } catch (FileNotFoundException ex) {
-                                    }
-                                    frame.repaint();
-                                    f.dispose();
-                                    setTitle(solar.getName());
-                                });
+                        over.setVisible(true);
                     }
                 }
             }
