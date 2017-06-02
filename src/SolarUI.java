@@ -14,6 +14,7 @@ import java.io.*;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -184,9 +185,14 @@ public class SolarUI extends JFrame implements ActionListener {
     public void load() {
         f = new JFrame("Please enter System Name");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        f.getContentPane().setLayout(new FlowLayout());
+        ArrayList<String> saves = solar.getSaves();
+        f.getContentPane().setLayout(new GridLayout(2 + saves.size(), 0));
         JTextField field = new JTextField(20);
         f.add(field);
+        //f.add(new JLabel("All found saves:"));
+        for (int A = 0; A < saves.size(); A++) {
+            f.add(new JLabel(saves.get(A)));
+        }
         f.pack();
         f.setVisible(true);
         field.addKeyListener(new KeyAdapter() {

@@ -138,4 +138,16 @@ public class Solar {
             return false;
         }
     }
+
+    public ArrayList<String> getSaves() {
+        File[] files = new File("src/save").listFiles();
+        ArrayList<String> results = new ArrayList<String>();
+        for (File file : files) {
+            if (file.isFile()) {
+                String curr = file.getName();
+                results.add(curr.substring(0, curr.length() - 4));
+            }
+        }
+        return results;
+    }
 }
