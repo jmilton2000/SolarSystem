@@ -125,7 +125,7 @@ class Solar {
 
     void rename() {
         for (int A = 0; A < planets.size(); A++) {
-            if (planets.get(A).getName().contains("planet")) {
+            if (planets.get(A).getName().contains("planet") && planets.get(A).getName().length() <= 8) {
                 planets.get(A).setName("planet " + (A + 1));
             }
         }
