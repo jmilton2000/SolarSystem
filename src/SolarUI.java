@@ -21,10 +21,10 @@ import javax.swing.JTextField;
 
 public class SolarUI extends JFrame implements ActionListener {
 
-    Solar solar = new Solar();
-    JFrame frame = new JFrame();
-    JFrame f = new JFrame();
-    JPanel panel;
+    private Solar solar = new Solar();
+    private JFrame frame = new JFrame();
+    private JFrame f = new JFrame();
+    private JPanel panel;
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
@@ -37,10 +37,10 @@ public class SolarUI extends JFrame implements ActionListener {
         setSize(400, 200);
         setResizable(false);
         //When you close the frame, end code )
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(new GridLayout(2, 0));
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setSize(1000, 200);
 
@@ -182,7 +182,7 @@ public class SolarUI extends JFrame implements ActionListener {
     }
 
     //for loading
-    public void load() {
+    private void load() {
         f = new JFrame("Please enter System Name");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ArrayList<String> saves = solar.getSaves();
@@ -212,7 +212,7 @@ public class SolarUI extends JFrame implements ActionListener {
         });
     }
 
-    public void New() {
+    private void New() {
         f = new JFrame("Please enter System Name");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new FlowLayout());
@@ -248,7 +248,7 @@ public class SolarUI extends JFrame implements ActionListener {
         });
     }
 
-    public void edit() {
+    private void edit() {
         f = new JFrame("Please enter Planet Name");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new FlowLayout());
@@ -270,7 +270,7 @@ public class SolarUI extends JFrame implements ActionListener {
 
     }
 
-    public void edit2(Planet planet) {
+    private void edit2(Planet planet) {
         f = new JFrame("Please enter Planet Info");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new GridLayout(4, 2));
@@ -314,8 +314,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     if (f3.getText().equals("")) {
                         f3.setText(planet.getColor());
                     }
-                    if (solar.allready(f1.getText())) {
-                    } else {
+                    if (!solar.allready(f1.getText())) {
                         planet.setName(f1.getText());
                     }
                     double temp = Double.parseDouble(f2.getText());
