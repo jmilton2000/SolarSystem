@@ -24,7 +24,6 @@ public class SolarUI extends JFrame implements ActionListener {
     private Solar solar = new Solar();
     private JFrame frame = new JFrame();
     private JFrame f = new JFrame();
-    private JPanel panel;
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
@@ -45,7 +44,7 @@ public class SolarUI extends JFrame implements ActionListener {
         frame.setSize(1000, 200);
 
         //sets up drawing panel
-        panel = new JPanel() {
+        JPanel panel = new JPanel() {
                     @Override
                     public void paintComponent(Graphics g) {
                         super.paintComponent(g);
@@ -57,7 +56,7 @@ public class SolarUI extends JFrame implements ActionListener {
                             Planet curr = solar.getPlanets().get(A);
                             //g.setColor(Color.red);
                             String color = curr.getColor();
-                            color.toUpperCase();
+                            color = color.toUpperCase();
                             if (color.equals("R")) {
                                 g.setColor(Color.red);
                             }
@@ -168,12 +167,15 @@ public class SolarUI extends JFrame implements ActionListener {
         } else if (name.equals("add")) {
             try {
                 solar.addPlanet();
-            } catch (FileNotFoundException ex) {}
+            } catch (FileNotFoundException ex) {
+                System.out.println("file not found");
+            }
             frame.repaint();
         } else if (name.equals("over")) {
             try {
                 solar.export();
             } catch (FileNotFoundException ex) {
+                System.out.println("file not found");
             }
             frame.repaint();
             f.dispose();
@@ -203,7 +205,9 @@ public class SolarUI extends JFrame implements ActionListener {
                     solar.setName(name);
                     try {
                         solar.load(name);
-                    } catch (FileNotFoundException ex) {}
+                    } catch (FileNotFoundException ex) {
+                        System.out.println("file not found");
+                    }
                     frame.repaint();
                     f.dispose();
                     setTitle(solar.getName());
@@ -235,6 +239,7 @@ public class SolarUI extends JFrame implements ActionListener {
                         try {
                             solar.export();
                         } catch (FileNotFoundException ex) {
+                            System.out.println("file not found");
                         }
                         frame.repaint();
                         f.dispose();
@@ -338,7 +343,9 @@ public class SolarUI extends JFrame implements ActionListener {
                     frame.repaint();
                     try {
                         solar.export();
-                    } catch (FileNotFoundException ex) {}
+                    } catch (FileNotFoundException ex) {
+                        System.out.println("file not found");
+                    }
                 }
             }
         };
@@ -355,6 +362,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     try {
                         solar.export();
                     } catch (FileNotFoundException ex) {
+                        System.out.println("file not found");
                     }
                     solar.rename();
                 });
