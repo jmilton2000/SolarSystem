@@ -1,13 +1,10 @@
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.*;
@@ -17,7 +14,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 
 public class SolarUI extends JFrame implements ActionListener {
 
@@ -150,28 +146,26 @@ public class SolarUI extends JFrame implements ActionListener {
         //Creates the button onto the UI
         add(loadButton);
         add(CreateButton);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String name = actionEvent.getActionCommand();
-        //you can set .equals to .equalsIgnoreCase if want
-        if (name.equals("edit")) {
+        if (name.equals("edit")) { //runs edit method
             if (solar.getPlanets().size() != 0 && !f.isVisible()) {
                 edit();
             }
-        } else if (name.equalsIgnoreCase("exit")) {
+        } else if (name.equalsIgnoreCase("exit")) { //exits program
             System.out.println("Closed");
             System.exit(0);
-        } else if (name.equals("add")) {
+        } else if (name.equals("add")) { //adds planet
             try {
                 solar.addPlanet();
             } catch (FileNotFoundException ex) {
                 System.out.println("file not found");
             }
             frame.repaint();
-        } else if (name.equals("over")) {
+        } else if (name.equals("over")) { //override existing file
             try {
                 solar.export();
             } catch (FileNotFoundException ex) {
@@ -216,6 +210,7 @@ public class SolarUI extends JFrame implements ActionListener {
         });
     }
 
+    //allows user make a new system
     private void New() {
         f = new JFrame("Please enter System Name");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -239,7 +234,7 @@ public class SolarUI extends JFrame implements ActionListener {
                         try {
                             solar.export();
                         } catch (FileNotFoundException ex) {
-                            System.out.println("file not found");
+                            System.out.println("ERROR: file not found");
                         }
                         frame.repaint();
                         f.dispose();
@@ -253,6 +248,7 @@ public class SolarUI extends JFrame implements ActionListener {
         });
     }
 
+    //gets the planet the user wants to edit
     private void edit() {
         f = new JFrame("Please enter Planet Name");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -261,6 +257,8 @@ public class SolarUI extends JFrame implements ActionListener {
         f.add(field);
         f.pack();
         f.setVisible(true);
+
+        //if the enter key is pressed
         field.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -275,6 +273,7 @@ public class SolarUI extends JFrame implements ActionListener {
 
     }
 
+    //creates and shows frame to edit planets with
     private void edit2(Planet planet) {
         f = new JFrame("Please enter Planet Info");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -283,18 +282,15 @@ public class SolarUI extends JFrame implements ActionListener {
         JButton remove = new JButton("Remove Planet");
         remove.setActionCommand("remove");
 
+        //sets up
         JTextField f1 = new JTextField(planet.getName());
         JTextField f2 = new JTextField(Integer.toString(planet.getSize()));
         JTextField f3 = new JTextField(planet.getColor());
+        JLabel L1 = new JLabel("Name:");
+        JLabel L2 = new JLabel("Size (1,2,3,4):");
+        JLabel L3 = new JLabel("Color (RGB):");
 
-        JLabel L1 = new JLabel();
-        JLabel L2 = new JLabel();
-        JLabel L3 = new JLabel();
-
-        L1.setText("Name:");
-        L2.setText("Size (1,2,3,4):");
-        L3.setText("Color (RGB):");
-
+        //adds labels and text boxes
         f.add(L1);
         f.add(f1);
         f.add(L2);
@@ -302,10 +298,10 @@ public class SolarUI extends JFrame implements ActionListener {
         f.add(L3);
         f.add(f3);
         f.add(remove);
-
         f.pack();
         f.setVisible(true);
 
+        //reads text in text boxes and changes planets accordingly
         KeyAdapter enter = new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -344,7 +340,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     try {
                         solar.export();
                     } catch (FileNotFoundException ex) {
-                        System.out.println("file not found");
+                        System.out.println("ERROR: file not found");
                     }
                 }
             }
@@ -353,6 +349,7 @@ public class SolarUI extends JFrame implements ActionListener {
         f1.addKeyListener(enter);
         f2.addKeyListener(enter);
         f3.addKeyListener(enter);
+        //what runs when the remove button is pressed
         remove.addActionListener(
                 actionEvent -> {
                     solar.getPlanets().remove(planet);
@@ -362,7 +359,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     try {
                         solar.export();
                     } catch (FileNotFoundException ex) {
-                        System.out.println("file not found");
+                        System.out.println("ERROR: file not found");
                     }
                     solar.rename();
                 });

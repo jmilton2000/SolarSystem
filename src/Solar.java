@@ -12,22 +12,15 @@ class Solar {
     }
 
     //getters and setters
-    //void setSunSize(int sunSize) {
-    //    this.sunSize = sunSize;
-    //}
-
     int getSunSize() {
         return sunSize;
     }
-
     ArrayList<Planet> getPlanets() {
         return planets;
     }
-
     String getName() {
         return name;
     }
-
     void setName(String name) {
         this.name = name;
     }
@@ -123,6 +116,7 @@ class Solar {
         }
     }
 
+    //for renaming a planets with a default name if a planet is deleted
     void rename() {
         for (int A = 0; A < planets.size(); A++) {
             if (planets.get(A).getName().contains("planet") && planets.get(A).getName().length() <= 8) {
