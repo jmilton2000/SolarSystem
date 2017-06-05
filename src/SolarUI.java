@@ -364,4 +364,9 @@ public class SolarUI extends JFrame implements ActionListener {
                     solar.rename();
                 });
     }
+
+    //swaps two planets
+    private void swap() {
+
+    }
 }
