@@ -363,14 +363,14 @@ public class SolarUI extends JFrame implements ActionListener {
                 actionEvent -> {
                     solar.getPlanets().remove(planet);
                     solar.resetDis();
-                    frame.repaint();
-                    f.dispose();
                     try {
                         solar.export();
                     } catch (FileNotFoundException ex) {
                         System.out.println("ERROR: file not found");
                     }
                     solar.rename();
+                    frame.repaint();
+                    f.dispose();
                 });
     }
 
