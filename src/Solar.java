@@ -125,11 +125,12 @@ class Solar {
         }
     }
 
-    boolean allready(String p) {
+    boolean allReady(String p) {
         Planet p2 = this.findPlanet(p);
         return p.equals(p2.getName());
     }
 
+    //gets all the file saves in the save folder
     ArrayList<String> getSaves() {
         File[] files = new File("src/save").listFiles();
         ArrayList<String> results = new ArrayList<>();

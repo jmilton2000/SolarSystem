@@ -38,6 +38,7 @@ public class SolarUI extends JFrame implements ActionListener {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setSize(1000, 200);
+        frame.setResizable(false);
 
         //sets up drawing panel
         JPanel panel = new JPanel() {
@@ -178,6 +179,10 @@ public class SolarUI extends JFrame implements ActionListener {
             frame.repaint();
             f.dispose();
             setTitle(solar.getName());
+        } else if (name.equals("Swap")) {
+            if (solar.getPlanets().size() >= 2 && !f.isVisible()) {
+                swap();
+            }
         }
     }
 
@@ -319,7 +324,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     if (f3.getText().equals("")) {
                         f3.setText(planet.getColor());
                     }
-                    if (!solar.allready(f1.getText())) {
+                    if (!solar.allReady(f1.getText())) {
                         planet.setName(f1.getText());
                     }
                     double temp = Double.parseDouble(f2.getText());
@@ -371,6 +376,38 @@ public class SolarUI extends JFrame implements ActionListener {
 
     //swaps two planets
     private void swap() {
+        f = new JFrame("Please enter two planets");
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        f.getContentPane().setLayout(new GridLayout(2, 0));
+
+        JTextField f1 = new JTextField();
+        JTextField f2 = new JTextField();
+        JLabel l1 = new JLabel("Planet 1:");
+        JLabel l2 = new JLabel("Planet 2:");
+        f.add(l1);
+        f.add(f1);
+        f.add(l2);
+        f.add(f2);
+        f.pack();
+        f.setVisible(true);
+
+        KeyAdapter enter = new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    Planet p1 = solar.findPlanet(f1.getText());
+                    Planet p2 = solar.findPlanet(f2.getText());
+                    int i1 = solar.getPlanets().indexOf(p1);
+                    int i2 = solar.getPlanets().indexOf(p2);
+                    solar.getPlanets().set(i1, p2);
+                    solar.getPlanets().set(i2, p1);
+                    frame.repaint();
+                    f.dispose();
+                }
+            }
+        };
+        f1.addKeyListener(enter);
+        f2.addKeyListener(enter);
 
     }
 }
