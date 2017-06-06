@@ -29,11 +29,11 @@ public class SolarUI extends JFrame implements ActionListener {
         //name of the screen
         setTitle(solar.getName());
         //makes the size of the screen width by height
-        setSize(400, 200);
+        setSize(300, 200);
         setResizable(false);
         //When you close the frame, end code )
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(2, 0));
+        setLayout(new GridLayout(3, 0));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -85,6 +85,7 @@ public class SolarUI extends JFrame implements ActionListener {
         //makes a new button
         JButton loadButton = new JButton("Edit Planet");
         JButton CreateButton = new JButton("Add Planet");
+        JButton SwapButton = new JButton("Swap Planets");
 
         //menu bar
 
@@ -138,14 +139,17 @@ public class SolarUI extends JFrame implements ActionListener {
         //makes the action listener parameters this
         loadButton.setActionCommand("edit");
         CreateButton.setActionCommand("add");
+        SwapButton.setActionCommand("Swap");
 
         //makes the button work
         loadButton.addActionListener(this);
         CreateButton.addActionListener(this);
+        SwapButton.addActionListener(this);
 
         //Creates the button onto the UI
         add(loadButton);
         add(CreateButton);
+        add(SwapButton);
     }
 
     @Override
