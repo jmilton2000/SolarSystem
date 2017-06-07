@@ -74,6 +74,7 @@ class Solar {
             output.println(planet.getColor());
             output.println(planet.getDistance());
         }
+        this.resetDis();
     }
 
     //loads a sol file in to planets array
