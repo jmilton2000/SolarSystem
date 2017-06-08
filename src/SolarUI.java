@@ -21,7 +21,7 @@ public class SolarUI extends JFrame implements ActionListener {
     private JFrame frame = new JFrame();
     private JFrame f = new JFrame();
     private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE};
-
+    private String[] help = new String[]{"R", "G", "B"};
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
@@ -297,7 +297,7 @@ public class SolarUI extends JFrame implements ActionListener {
         //sets up
         JTextField f1 = new JTextField(planet.getName());
         JTextField f2 = new JTextField(Integer.toString(planet.getSize()));
-        JTextField f3 = new JTextField(planet.getColor());
+        JTextField f3 = new JTextField(help[planet.getColor()]);
         JLabel L1 = new JLabel("Name:");
         JLabel L2 = new JLabel("Size (1,2,3,4):");
         JLabel L3 = new JLabel("Color (RGB):");
@@ -325,10 +325,7 @@ public class SolarUI extends JFrame implements ActionListener {
                         f2.setText(Integer.toString(planet.getSize()));
                     }
                     if (f3.getText().equals("")) {
-                        f3.setText("" + planet.getColor());
-                    }
-                    if (!solar.allReady(f1.getText())) {
-                        planet.setName(f1.getText());
+                        f3.setText(help[planet.getColor()]);
                     }
                     double temp = Double.parseDouble(f2.getText());
                     int size = (int) temp;
@@ -354,6 +351,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     } catch (FileNotFoundException ex) {
                         System.out.println("ERROR: file not found");
                     }
+                    f3.setText(help[planet.getColor()]);
                 }
             }
         };
