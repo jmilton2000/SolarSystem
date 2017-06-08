@@ -53,7 +53,7 @@ class Solar {
     }
 
     //adds a planet to plaets array (only used by load)
-    private void addPlanet(String name, int size, String color, int distance) {
+    private void addPlanet(String name, int size, int color, int distance) {
         Planet planet = new Planet();
         planet.setName(name);
         planet.setDistance(distance);
@@ -64,6 +64,7 @@ class Solar {
 
     //exports planets array into sol file
     void export() throws FileNotFoundException {
+        this.resetDis();
         PrintStream output = new PrintStream(new File("src/save/" + name + ".sol"));
         output.println(planets.size());
         output.println(getSunSize());
@@ -74,7 +75,7 @@ class Solar {
             output.println(planet.getColor());
             output.println(planet.getDistance());
         }
-        this.resetDis();
+
     }
 
     //loads a sol file in to planets array
@@ -88,7 +89,7 @@ class Solar {
             String pName = input.next();
             pName = pName.replaceAll("_", " ");
             int size = input.nextInt();
-            String color = input.next();
+            int color = input.nextInt();
             int distance = input.nextInt();
             addPlanet(pName, size, color, distance);
         }

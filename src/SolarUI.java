@@ -20,25 +20,25 @@ public class SolarUI extends JFrame implements ActionListener {
     private Solar solar = new Solar();
     private JFrame frame = new JFrame();
     private JFrame f = new JFrame();
+    private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE};
+
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
     }
 
     private SolarUI() {
-        //name of the screen
         setTitle(solar.getName());
-        //makes the size of the screen width by height
         setSize(300, 200);
         setResizable(false);
-        //When you close the frame, end code )
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(new GridLayout(3, 0));
-
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.setSize(1000, 200);
         frame.setResizable(false);
+        setUndecorated(true);
+        setLocation(frame.getX(), 200);
 
         //sets up drawing panel
         JPanel panel = new JPanel() {
@@ -52,17 +52,15 @@ public class SolarUI extends JFrame implements ActionListener {
                         for (int A = 0; A < solar.getPlanets().size(); A++) {
                             Planet curr = solar.getPlanets().get(A);
                             //g.setColor(Color.red);
-                            String color = curr.getColor();
-                            color = color.toUpperCase();
-                            if (color.equals("R")) {
+                            int color = curr.getColor();
+                            g.setColor(colors[color]);
+                            /*if (color.equals("R")) {
                                 g.setColor(Color.red);
-                            }
-                            if (color.equals("G")) {
+                            } else if (color.equals("G")) {
                                 g.setColor(Color.green);
-                            }
-                            if (color.equals("B")) {
+                            } else if (color.equals("B")) {
                                 g.setColor(Color.blue);
-                            }
+                            }*/
                             int size = curr.getSizeReal();
                             int distance = curr.getDistance();
                             g.fillOval(distance, 100 + 10 - size, size, size);
@@ -189,6 +187,7 @@ public class SolarUI extends JFrame implements ActionListener {
     //for loading
     private void load() {
         f = new JFrame("Please enter System Name");
+        f.setLocation(300, 200);
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ArrayList<String> saves = solar.getSaves();
         f.getContentPane().setLayout(new GridLayout(2 + saves.size(), 0));
@@ -222,6 +221,8 @@ public class SolarUI extends JFrame implements ActionListener {
     //allows user make a new system
     private void New() {
         f = new JFrame("Please enter System Name");
+        f.setLocation(300, 200);
+        ;
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new FlowLayout());
         JTextField field = new JTextField(20);
@@ -260,6 +261,7 @@ public class SolarUI extends JFrame implements ActionListener {
     //gets the planet the user wants to edit
     private void edit() {
         f = new JFrame("Please enter Planet Name");
+        f.setLocation(300, 200);
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new FlowLayout());
         JTextField field = new JTextField(20);
@@ -285,6 +287,7 @@ public class SolarUI extends JFrame implements ActionListener {
     //creates and shows frame to edit planets with
     private void edit2(Planet planet) {
         f = new JFrame("Please enter Planet Info");
+        f.setLocation(300, 200);
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new GridLayout(4, 2));
 
@@ -322,25 +325,25 @@ public class SolarUI extends JFrame implements ActionListener {
                         f2.setText(Integer.toString(planet.getSize()));
                     }
                     if (f3.getText().equals("")) {
-                        f3.setText(planet.getColor());
+                        f3.setText("" + planet.getColor());
                     }
                     if (!solar.allReady(f1.getText())) {
                         planet.setName(f1.getText());
                     }
                     double temp = Double.parseDouble(f2.getText());
                     int size = (int) temp;
-                    String color = "R";
+                    int color = 0;
                     if (size > 4) {
                         size = 4;
                     } else if (size < 1) {
                         size = 1;
                     }
                     if (f3.getText().startsWith("r") || f3.getText().startsWith("R")) {
-                        color = "R";
+                        color = 0;
                     } else if (f3.getText().startsWith("g") || f3.getText().startsWith("G")) {
-                        color = "G";
+                        color = 1;
                     } else if (f3.getText().startsWith("b") || f3.getText().startsWith("B")) {
-                        color = "B";
+                        color = 2;
                     }
                     planet.setSize(size);
                     planet.setColor(color);
@@ -362,7 +365,6 @@ public class SolarUI extends JFrame implements ActionListener {
         remove.addActionListener(
                 actionEvent -> {
                     solar.getPlanets().remove(planet);
-                    solar.resetDis();
                     try {
                         solar.export();
                     } catch (FileNotFoundException ex) {
@@ -377,6 +379,8 @@ public class SolarUI extends JFrame implements ActionListener {
     //swaps two planets
     private void swap() {
         f = new JFrame("Please enter two planets");
+        f.setLocation(300, 200);
+        f.setSize(250, 70);
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new GridLayout(2, 0));
 
@@ -388,7 +392,6 @@ public class SolarUI extends JFrame implements ActionListener {
         f.add(f1);
         f.add(l2);
         f.add(f2);
-        f.pack();
         f.setVisible(true);
 
         KeyAdapter enter = new KeyAdapter() {
@@ -407,6 +410,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     } catch (FileNotFoundException ex) {
                         System.out.println("ERROR: file not found");
                     }
+                    solar.rename();
                     f.dispose();
                 }
 
@@ -414,6 +418,5 @@ public class SolarUI extends JFrame implements ActionListener {
         };
         f1.addKeyListener(enter);
         f2.addKeyListener(enter);
-
     }
 }
