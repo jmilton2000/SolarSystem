@@ -21,8 +21,8 @@ public class SolarUI extends JFrame implements ActionListener {
     private JFrame frame = new JFrame();
     private JFrame f = new JFrame();
     //private Color orange = new Color(255, 128, 0);
-    private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, new Color(255, 128, 0)};
-    private String[] help = new String[]{"Red", "Green", "Blue", "Orange"};
+    private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, new Color(255, 128, 0), Color.CYAN, Color.WHITE, new Color(153, 51, 255)};
+    private String[] help = new String[]{"Red", "Green", "Blue", "Orange", "Cyan", "White", "Purple"};
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
@@ -214,7 +214,6 @@ public class SolarUI extends JFrame implements ActionListener {
     private void New() {
         f = new JFrame("Please enter System Name");
         f.setLocation(300, 200);
-        ;
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new FlowLayout());
         JTextField field = new JTextField(20);
@@ -292,7 +291,7 @@ public class SolarUI extends JFrame implements ActionListener {
         JTextField f3 = new JTextField(help[planet.getColor()]);
         JLabel L1 = new JLabel("Name:");
         JLabel L2 = new JLabel("Size (1,2,3,4):");
-        JLabel L3 = new JLabel("Color (RGB):");
+        JLabel L3 = new JLabel("Color:");
 
         //adds labels and text boxes
         f.add(L1);
@@ -338,6 +337,12 @@ public class SolarUI extends JFrame implements ActionListener {
                         color = 2;
                     } else if (f3.getText().startsWith("o") || f3.getText().startsWith("O")) {
                         color = 3;
+                    } else if (f3.getText().startsWith("c") || f3.getText().startsWith("C")) {
+                        color = 4;
+                    } else if (f3.getText().startsWith("w") || f3.getText().startsWith("W")) {
+                        color = 5;
+                    } else if (f3.getText().startsWith("p") || f3.getText().startsWith("P")) {
+                        color = 6;
                     }
                     planet.setSize(size);
                     planet.setColor(color);
