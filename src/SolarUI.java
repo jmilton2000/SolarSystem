@@ -20,8 +20,9 @@ public class SolarUI extends JFrame implements ActionListener {
     private Solar solar = new Solar();
     private JFrame frame = new JFrame();
     private JFrame f = new JFrame();
-    private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE};
-    private String[] help = new String[]{"R", "G", "B"};
+    //private Color orange = new Color(255, 128, 0);
+    private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, new Color(255, 128, 0)};
+    private String[] help = new String[]{"Red", "Green", "Blue", "Orange"};
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
@@ -51,16 +52,8 @@ public class SolarUI extends JFrame implements ActionListener {
                         g.fillOval(100, solar.getSunSize()/3, solar.getSunSize(), solar.getSunSize());
                         for (int A = 0; A < solar.getPlanets().size(); A++) {
                             Planet curr = solar.getPlanets().get(A);
-                            //g.setColor(Color.red);
                             int color = curr.getColor();
                             g.setColor(colors[color]);
-                            /*if (color.equals("R")) {
-                                g.setColor(Color.red);
-                            } else if (color.equals("G")) {
-                                g.setColor(Color.green);
-                            } else if (color.equals("B")) {
-                                g.setColor(Color.blue);
-                            }*/
                             int size = curr.getSizeReal();
                             int distance = curr.getDistance();
                             g.fillOval(distance, 100 + 10 - size, size, size);
@@ -85,9 +78,7 @@ public class SolarUI extends JFrame implements ActionListener {
         JButton loadButton = new JButton("Edit Planet");
         JButton CreateButton = new JButton("Add Planet");
         JButton SwapButton = new JButton("Swap Planets");
-
         //menu bar
-
         JMenuBar bar = new JMenuBar();
         //name of the tab on bar
         JMenu file = new JMenu("Menu");
@@ -104,6 +95,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     }
                 });
 
+        //adds planet
         newP.addActionListener(
                 actionEvent -> {
                     if (!f.isVisible()) {
@@ -327,6 +319,9 @@ public class SolarUI extends JFrame implements ActionListener {
                     if (f3.getText().equals("")) {
                         f3.setText(help[planet.getColor()]);
                     }
+                    if (!solar.allReady(f1.getText())) {
+                        planet.setName(f1.getText());
+                    }
                     double temp = Double.parseDouble(f2.getText());
                     int size = (int) temp;
                     int color = 0;
@@ -341,6 +336,8 @@ public class SolarUI extends JFrame implements ActionListener {
                         color = 1;
                     } else if (f3.getText().startsWith("b") || f3.getText().startsWith("B")) {
                         color = 2;
+                    } else if (f3.getText().startsWith("o") || f3.getText().startsWith("O")) {
+                        color = 3;
                     }
                     planet.setSize(size);
                     planet.setColor(color);
