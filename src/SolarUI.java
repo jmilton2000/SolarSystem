@@ -21,8 +21,8 @@ public class SolarUI extends JFrame implements ActionListener {
     private JFrame frame = new JFrame();
     private JFrame f = new JFrame();
     //private Color orange = new Color(255, 128, 0);
-    private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.decode("#F39C12"), Color.CYAN, Color.WHITE, Color.decode("#8E44AD"), Color.decode("#000000")};
-    private String[] help = new String[]{"Red", "Green", "Blue", "Orange", "Cyan", "White", "Purple", "#000000"};
+    private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.decode("#F39C12"), Color.CYAN, Color.WHITE, Color.decode("#8E44AD")};
+    private String[] help = new String[]{"Red", "Green", "Blue", "Orange", "Cyan", "White", "Purple"};
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
@@ -53,7 +53,11 @@ public class SolarUI extends JFrame implements ActionListener {
                         for (int A = 0; A < solar.getPlanets().size(); A++) {
                             Planet curr = solar.getPlanets().get(A);
                             int color = curr.getColor();
-                            g.setColor(colors[color]);
+                            if(color == 7) {
+                                g.setColor(Color.decode(curr.getCustomColor()));
+                            } else {
+                                g.setColor(colors[color]);
+                            }
                             int size = curr.getSizeReal();
                             int distance = curr.getDistance();
                             g.fillOval(distance, 100 + 10 - size, size, size);
@@ -322,7 +326,7 @@ public class SolarUI extends JFrame implements ActionListener {
                         planet.setName(f1.getText());
                     }
                     if(f3.getText().startsWith("#") && f3.getText().length() < 7) {
-                        f3.setText(help[7]);
+                        f3.setText(planet.getCustomColor());
                     }
                     double temp = Double.parseDouble(f2.getText());
                     int size = (int) temp;
@@ -348,10 +352,9 @@ public class SolarUI extends JFrame implements ActionListener {
                         color = 6;
                     } else if (f3.getText().startsWith("#") && f3.getText().length() == 7) {
                         color = 7;
-                        colors[7] = Color.decode(f3.getText());
-                        help[7] = f3.getText();
+                        planet.setCustomColor(f3.getText());
                     }
-                    if (!f3.getText().equals(help[color])) {
+                    if (color != 7 && !f3.getText().equals(help[color])) {
                         f3.setText(help[color]);
                     }
                     planet.setSize(size);

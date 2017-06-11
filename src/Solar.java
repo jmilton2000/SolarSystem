@@ -55,12 +55,13 @@ class Solar {
     }
 
     //adds a planet to plaets array (only used by load)
-    private void addPlanet(String name, int size, int color, int distance) {
+    private void addPlanet(String name, int size, int color, int distance, String customColor) {
         Planet planet = new Planet();
         planet.setName(name);
         planet.setDistance(distance);
         planet.setSize(size);
         planet.setColor(color);
+        planet.setCustomColor(customColor);
         planets.add(planet);
     }
 
@@ -76,6 +77,7 @@ class Solar {
             output.println(planet.getSize());
             output.println(planet.getColor());
             output.println(planet.getDistance());
+            output.println(planet.getCustomColor());
         }
 
     }
@@ -93,7 +95,8 @@ class Solar {
             int size = input.nextInt();
             int color = input.nextInt();
             int distance = input.nextInt();
-            addPlanet(pName, size, color, distance);
+            String customColor = input.next();
+            addPlanet(pName, size, color, distance, customColor);
         }
     }
 
@@ -136,7 +139,7 @@ class Solar {
 
     //gets all the file saves in the save folder
     ArrayList<String> getSaves() {
-        File[] files = new File("src/save").listFiles();
+        File[] files = new File(dir).listFiles();
         ArrayList<String> results = new ArrayList<>();
         for (File file : files) {
             if (file.isFile()) {
