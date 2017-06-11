@@ -21,8 +21,8 @@ public class SolarUI extends JFrame implements ActionListener {
     private JFrame frame = new JFrame();
     private JFrame f = new JFrame();
     //private Color orange = new Color(255, 128, 0);
-    private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, new Color(255, 128, 0), Color.CYAN, Color.WHITE, new Color(153, 51, 255)};
-    private String[] help = new String[]{"Red", "Green", "Blue", "Orange", "Cyan", "White", "Purple"};
+    private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.decode("#F39C12"), Color.CYAN, Color.WHITE, Color.decode("#8E44AD"), Color.decode("#000000")};
+    private String[] help = new String[]{"Red", "Green", "Blue", "Orange", "Cyan", "White", "Purple", "#000000"};
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
@@ -230,7 +230,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     String name = field.getText();
                     solar = new Solar();
                     solar.setName(name);
-                    File file = new File("src/save/" + solar.getName() + ".sol");
+                    File file = new File("Solar Saves/" + solar.getName() + ".sol");
                     if (!file.exists()) {
                         try {
                             solar.export();
@@ -343,6 +343,10 @@ public class SolarUI extends JFrame implements ActionListener {
                         color = 5;
                     } else if (f3.getText().startsWith("p") || f3.getText().startsWith("P")) {
                         color = 6;
+                    } else if (f3.getText().startsWith("#")) {
+                        color = 7;
+                        colors[7] = Color.decode(f3.getText());
+                        help[7] = f3.getText();
                     }
                     planet.setSize(size);
                     planet.setColor(color);
