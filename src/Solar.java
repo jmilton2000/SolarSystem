@@ -5,6 +5,7 @@ class Solar {
     private ArrayList<Planet> planets = new ArrayList<>();
     private int sunSize;
     private String name;
+    String dir = System.getProperty("user.home") + File.separator+"Documents"+File.separator+"Solar Saves";
 
     Solar() {
         name = "SolarSystem";
@@ -24,6 +25,7 @@ class Solar {
     void setName(String name) {
         this.name = name;
     }
+    String getDir() { return dir; }
 
     //adds a planet to plaets array
     void addPlanet() throws FileNotFoundException {
@@ -65,7 +67,7 @@ class Solar {
     //exports planets array into sol file
     void export() throws FileNotFoundException {
         this.resetDis();
-        PrintStream output = new PrintStream(new File("src/save/" + name + ".sol"));
+        PrintStream output = new PrintStream(new File(dir,name + ".sol"));
         output.println(planets.size());
         output.println(getSunSize());
         for (int A = 0; A < planets.size(); A++) {
@@ -81,7 +83,7 @@ class Solar {
     //loads a sol file in to planets array
     void load(String name) throws FileNotFoundException {
         planets = new ArrayList<>();
-        Scanner input = new Scanner(new File("src/save/" + name + ".sol"));
+        Scanner input = new Scanner(new File(dir,name + ".sol"));
         this.name = name;
         int num = input.nextInt();
         sunSize = input.nextInt();

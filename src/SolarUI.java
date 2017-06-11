@@ -38,7 +38,7 @@ public class SolarUI extends JFrame implements ActionListener {
         frame.setVisible(true);
         frame.setSize(1000, 200);
         frame.setResizable(false);
-        setUndecorated(true);
+        //setUndecorated(true);
         setLocation(frame.getX(), 200);
 
         //sets up drawing panel
@@ -230,7 +230,7 @@ public class SolarUI extends JFrame implements ActionListener {
                     String name = field.getText();
                     solar = new Solar();
                     solar.setName(name);
-                    File file = new File("Solar Saves/" + solar.getName() + ".sol");
+                    File file = new File(solar.getDir() + solar.getName() + ".sol");
                     if (!file.exists()) {
                         try {
                             solar.export();
