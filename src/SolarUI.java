@@ -321,6 +321,9 @@ public class SolarUI extends JFrame implements ActionListener {
                     if (!solar.allReady(f1.getText())) {
                         planet.setName(f1.getText());
                     }
+                    if(f3.getText().startsWith("#") && f3.getText().length() < 7) {
+                        f3.setText(help[7]);
+                    }
                     double temp = Double.parseDouble(f2.getText());
                     int size = (int) temp;
                     int color = 0;
@@ -343,10 +346,13 @@ public class SolarUI extends JFrame implements ActionListener {
                         color = 5;
                     } else if (f3.getText().startsWith("p") || f3.getText().startsWith("P")) {
                         color = 6;
-                    } else if (f3.getText().startsWith("#")) {
+                    } else if (f3.getText().startsWith("#") && f3.getText().length() == 7) {
                         color = 7;
                         colors[7] = Color.decode(f3.getText());
                         help[7] = f3.getText();
+                    }
+                    if (!f3.getText().equals(help[color])) {
+                        f3.setText(help[color]);
                     }
                     planet.setSize(size);
                     planet.setColor(color);
@@ -357,7 +363,6 @@ public class SolarUI extends JFrame implements ActionListener {
                     } catch (FileNotFoundException ex) {
                         System.out.println("ERROR: file not found");
                     }
-                    f3.setText(help[planet.getColor()]);
                 }
             }
         };
