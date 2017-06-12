@@ -68,7 +68,7 @@ class Solar {
     //exports planets array into sol file
     void export() throws FileNotFoundException {
         this.resetDis();
-        PrintStream output = new PrintStream(new File(dir,name + ".sol"));
+        PrintStream output = new PrintStream(new File(dir, this.name + ".sol"));
         output.println(planets.size());
         output.println(getSunSize());
         for (int A = 0; A < planets.size(); A++) {

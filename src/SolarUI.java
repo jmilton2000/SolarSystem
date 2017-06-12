@@ -36,7 +36,7 @@ public class SolarUI extends JFrame implements ActionListener {
         setLayout(new GridLayout(3, 0));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setSize(1000, 200);
+        frame.setSize(1200, 200);
         frame.setResizable(false);
         //setUndecorated(true);
         setLocation(frame.getX(), 200);
@@ -292,7 +292,12 @@ public class SolarUI extends JFrame implements ActionListener {
         //sets up
         JTextField f1 = new JTextField(planet.getName());
         JTextField f2 = new JTextField(Integer.toString(planet.getSize()));
-        JTextField f3 = new JTextField(help[planet.getColor()]);
+        JTextField f3;
+        if (planet.getColor() == 7) {
+            f3 = new JTextField(planet.getCustomColor());
+        } else {
+            f3 = new JTextField(help[planet.getColor()]);
+        }
         JLabel L1 = new JLabel("Name:");
         JLabel L2 = new JLabel("Size (1,2,3,4):");
         JLabel L3 = new JLabel("Color:");
