@@ -6,7 +6,7 @@ class Solar {
     private int sunSize;
     private String name;
     //private String dir = System.getProperty("user.home") + File.separator+"Documents"+File.separator+"Solar Saves";
-    private String dir = "src/save/" + name + ".sol";
+    private String dir = "src/save/";
     Solar() {
         name = "SolarSystem";
         sunSize = 100;
