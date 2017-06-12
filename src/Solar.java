@@ -5,8 +5,8 @@ class Solar {
     private ArrayList<Planet> planets = new ArrayList<>();
     private int sunSize;
     private String name;
-    String dir = System.getProperty("user.home") + File.separator+"Documents"+File.separator+"Solar Saves";
-
+    //private String dir = System.getProperty("user.home") + File.separator+"Documents"+File.separator+"Solar Saves";
+    private String dir = "src/save/" + name + ".sol";
     Solar() {
         name = "SolarSystem";
         sunSize = 100;
