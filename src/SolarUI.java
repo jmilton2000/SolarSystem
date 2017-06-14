@@ -23,6 +23,7 @@ public class SolarUI extends JFrame implements ActionListener {
     //private Color orange = new Color(255, 128, 0);
     private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.decode("#F39C12"), Color.CYAN, Color.WHITE, Color.decode("#8E44AD")};
     private String[] help = new String[]{"Red", "Green", "Blue", "Orange", "Cyan", "White", "Purple"};
+    private ImageIcon img = new ImageIcon(solar.getDir2() + "/Icon.png");
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
@@ -69,6 +70,12 @@ public class SolarUI extends JFrame implements ActionListener {
         frame.add(panel);
         frame.validate();
         frame.repaint();
+
+        //java.net.URL url = ClassLoader.getSystemResource(solar.getDir2());
+        //Toolkit.getDefaultToolkit().getImage(SolarUI.class.getResource(solar.getDir2() + "/Icon.png"));
+
+        frame.setIconImage(img.getImage());
+        setIconImage(img.getImage());
 
       /*
       (this is for above)
@@ -183,6 +190,7 @@ public class SolarUI extends JFrame implements ActionListener {
     //for loading
     private void load() {
         f = new JFrame("Please enter System Name");
+        f.setIconImage(img.getImage());
         f.setLocation(300, 200);
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ArrayList<String> saves = solar.getSaves();
@@ -217,6 +225,7 @@ public class SolarUI extends JFrame implements ActionListener {
     //allows user make a new system
     private void New() {
         f = new JFrame("Please enter System Name");
+        f.setIconImage(img.getImage());
         f.setLocation(300, 200);
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new FlowLayout());
@@ -256,6 +265,7 @@ public class SolarUI extends JFrame implements ActionListener {
     //gets the planet the user wants to edit
     private void edit() {
         f = new JFrame("Please enter Planet Name");
+        f.setIconImage(img.getImage());
         f.setLocation(300, 200);
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new FlowLayout());
@@ -282,6 +292,7 @@ public class SolarUI extends JFrame implements ActionListener {
     //creates and shows frame to edit planets with
     private void edit2(Planet planet) {
         f = new JFrame("Please enter Planet Info");
+        f.setIconImage(img.getImage());
         f.setLocation(300, 200);
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.getContentPane().setLayout(new GridLayout(4, 2));
@@ -396,6 +407,7 @@ public class SolarUI extends JFrame implements ActionListener {
     //swaps two planets
     private void swap() {
         f = new JFrame("Please enter two planets");
+        f.setIconImage(img.getImage());
         f.setLocation(300, 200);
         f.setSize(250, 70);
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
