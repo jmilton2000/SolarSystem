@@ -11,7 +11,7 @@ class Solar {
 
     //private String dir = "src/save/";
     Solar() {
-        //new File(dir2).mkdir();
+        new File(dir2).mkdir();
         new File(dir).mkdir();
         name = "SolarSystem";
         sunSize = 100;
