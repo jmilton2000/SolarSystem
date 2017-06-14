@@ -5,12 +5,13 @@ class Solar {
     private ArrayList<Planet> planets = new ArrayList<>();
     private int sunSize;
     private String name;
-    private String dir = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "Solar Stuff/Solar Saves";
+    //private String dir = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "Solar Stuff/Solar Saves";
+    private String dir = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "Solar Saves";
     private String dir2 = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "Solar Stuff";
 
     //private String dir = "src/save/";
     Solar() {
-        new File(dir2).mkdir();
+        //new File(dir2).mkdir();
         new File(dir).mkdir();
         name = "SolarSystem";
         sunSize = 100;
