@@ -5,14 +5,13 @@ class Solar {
     private ArrayList<Planet> planets = new ArrayList<>();
     private int sunSize;
     private String name;
-    //private String dir = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "Solar Stuff/Solar Saves";
-    private String dir = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "Solar Saves";
-    private String dir2 = System.getProperty("user.home") + File.separator + "Documents" + File.separator + "Solar Stuff";
-
+    //private String dir = "Solar Stuff";
+    private String dir = System.getProperty("user.home") + File.separator + "Documents/Solar Stuff";
     //private String dir = "src/save/";
+
     Solar() {
-        new File(dir2).mkdir();
-        new File(dir).mkdir();
+        //new File(dir).mkdir();
+        //new File(dir + "/Solar Saves").mkdir();
         name = "SolarSystem";
         sunSize = 100;
     }
@@ -31,10 +30,6 @@ class Solar {
         this.name = name;
     }
     String getDir() { return dir; }
-
-    String getDir2() {
-        return dir2;
-    }
 
     //adds a planet to plaets array
     void addPlanet() throws FileNotFoundException {
@@ -77,7 +72,7 @@ class Solar {
     //exports planets array into sol file
     void export() throws FileNotFoundException {
         this.resetDis();
-        PrintStream output = new PrintStream(new File(dir, this.name + ".sol"));
+        PrintStream output = new PrintStream(new File(dir + "/Solar Saves", this.name + ".sol"));
         output.println(planets.size());
         output.println(getSunSize());
         for (int A = 0; A < planets.size(); A++) {
@@ -94,7 +89,7 @@ class Solar {
     //loads a sol file in to planets array
     void load(String name) throws FileNotFoundException {
         planets = new ArrayList<>();
-        Scanner input = new Scanner(new File(dir,name + ".sol"));
+        Scanner input = new Scanner(new File(dir + "/Solar Saves",name + ".sol"));
         this.name = name;
         int num = input.nextInt();
         sunSize = input.nextInt();
@@ -148,7 +143,7 @@ class Solar {
 
     //gets all the file saves in the save folder
     ArrayList<String> getSaves() {
-        File[] files = new File(dir).listFiles();
+        File[] files = new File(dir + "/Solar Saves").listFiles();
         ArrayList<String> results = new ArrayList<>();
         for (File file : files) {
             if (file.isFile()) {

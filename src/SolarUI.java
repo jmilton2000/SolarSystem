@@ -14,16 +14,17 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import com.apple.eawt.Application;
 
 public class SolarUI extends JFrame implements ActionListener {
 
     private Solar solar = new Solar();
     private JFrame frame = new JFrame();
     private JFrame f = new JFrame();
-    //private Color orange = new Color(255, 128, 0);
     private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.decode("#F39C12"), Color.CYAN, Color.WHITE, Color.decode("#8E44AD")};
     private String[] help = new String[]{"Red", "Green", "Blue", "Orange", "Cyan", "White", "Purple"};
-    private ImageIcon img = new ImageIcon(solar.getDir2() + "/Icon.png");
+    private ImageIcon img = new ImageIcon(solar.getDir() + "/Icon.png");
+    private static String OS = System.getProperty("os.name").toLowerCase();
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
@@ -71,11 +72,13 @@ public class SolarUI extends JFrame implements ActionListener {
         frame.validate();
         frame.repaint();
 
-        //java.net.URL url = ClassLoader.getSystemResource(solar.getDir2());
-        //Toolkit.getDefaultToolkit().getImage(SolarUI.class.getResource(solar.getDir2() + "/Icon.png"));
-
         frame.setIconImage(img.getImage());
         setIconImage(img.getImage());
+        if(OS.contains("mac")) {
+            Application application = Application.getApplication();
+            Image image = Toolkit.getDefaultToolkit().getImage(solar.getDir() + "/Icon.png");
+            application.setDockIconImage(image);
+        }
 
       /*
       (this is for above)
