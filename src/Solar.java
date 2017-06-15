@@ -6,12 +6,12 @@ class Solar {
     private int sunSize;
     private String name;
     //private String dir = "Solar Stuff";
-    private String dir = System.getProperty("user.home") + File.separator + "Documents/Solar Stuff";
+    private String dir = System.getProperty("user.home") + File.separator + "Documents";
     //private String dir = "src/save/";
 
     Solar() {
         //new File(dir).mkdir();
-        //new File(dir + "/Solar Saves").mkdir();
+        new File(dir + "/Solar Saves").mkdir();
         name = "SolarSystem";
         sunSize = 100;
     }
@@ -31,7 +31,7 @@ class Solar {
     }
     String getDir() { return dir; }
 
-    //adds a planet to plaets array
+    //adds a planet to planets array
     void addPlanet() throws FileNotFoundException {
         if (planets.size() != 6) {
             String name = "planet " + (1 + planets.size());
@@ -58,7 +58,7 @@ class Solar {
         return planets.get(index);
     }
 
-    //adds a planet to plaets array (only used by load)
+    //adds a planet to planets array (only used by load)
     private void addPlanet(String name, int size, int color, int distance, String customColor) {
         Planet planet = new Planet();
         planet.setName(name);
@@ -89,7 +89,8 @@ class Solar {
     //loads a sol file in to planets array
     void load(String name) throws FileNotFoundException {
         planets = new ArrayList<>();
-        Scanner input = new Scanner(new File(dir + "/Solar Saves",name + ".sol"));
+        InputStream in = getClass().getResourceAsStream(dir + "/Solar Saves/" + name + ".sol");
+        Scanner input = new Scanner(new File(dir + "/Solar Saves", name + ".sol"));
         this.name = name;
         int num = input.nextInt();
         sunSize = input.nextInt();

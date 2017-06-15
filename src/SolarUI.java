@@ -23,7 +23,7 @@ public class SolarUI extends JFrame implements ActionListener {
     private JFrame f = new JFrame();
     private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.decode("#F39C12"), Color.CYAN, Color.WHITE, Color.decode("#8E44AD")};
     private String[] help = new String[]{"Red", "Green", "Blue", "Orange", "Cyan", "White", "Purple"};
-    private ImageIcon img = new ImageIcon(solar.getDir() + "/Icon.png");
+    private ImageIcon img = new ImageIcon("src/Icon.png");
     private static String OS = System.getProperty("os.name").toLowerCase();
 
     public static void main(String[] args) {
@@ -80,14 +80,6 @@ public class SolarUI extends JFrame implements ActionListener {
             application.setDockIconImage(image);
         }
 
-      /*
-      (this is for above)
-       FlowLayout
-       GridBagLayout
-       GridLayout (row,column)
-       BorderLayout ( add(button, BorderLayout.WEST)CENTER)
-       */
-
         //makes a new button
         JButton loadButton = new JButton("Edit Planet");
         JButton CreateButton = new JButton("Add Planet");
@@ -124,20 +116,12 @@ public class SolarUI extends JFrame implements ActionListener {
                     System.exit(0);
                 });
 
-        //JMenuItem extra = new JMenu("Extra");
-        //JMenuItem hello = new JMenuItem("hey");
-        //JMenuItem hello2 = new JMenuItem("hey yo");
 
         //make the shit inside the tab
         file.add(newP);
         file.add(load);
-        //file.add(extra);
         file.addSeparator();
         file.add(exit);
-        //makes the thing inside of the "extra" tab inside of the "stuff" tab
-        //extra.add(hello);
-        //extra.add(hello2);
-        //makes the tab inside the bar
         bar.add(file);
         setJMenuBar(bar);
 

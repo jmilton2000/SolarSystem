@@ -3,9 +3,7 @@
     <output-path>$USER_HOME$/Downloads</output-path>
     <root id="archive" name="Solar System.jar">
       <element id="module-output" name="Solar System" />
-      <element id="directory" name="Solar Stuff">
-        <element id="dir-copy" path="$PROJECT_DIR$/src/Solar Stuff" />
-      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/src/Solar Stuff/Icon.png" />
     </root>
   </artifact>
 </component>
