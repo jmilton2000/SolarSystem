@@ -14,7 +14,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import com.apple.eawt.Application;
 
 public class SolarUI extends JFrame implements ActionListener {
 
@@ -74,11 +73,6 @@ public class SolarUI extends JFrame implements ActionListener {
 
         frame.setIconImage(img.getImage());
         setIconImage(img.getImage());
-        if(OS.contains("mac")) {
-            Application application = Application.getApplication();
-            application.setDockIconImage(img.getImage());
-        }
-
         //makes a new button
         JButton loadButton = new JButton("Edit Planet");
         JButton CreateButton = new JButton("Add Planet");
