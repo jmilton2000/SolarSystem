@@ -23,7 +23,7 @@ public class SolarUI extends JFrame implements ActionListener {
     private JFrame f = new JFrame();
     private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.decode("#F39C12"), Color.CYAN, Color.WHITE, Color.decode("#8E44AD")};
     private String[] help = new String[]{"Red", "Green", "Blue", "Orange", "Cyan", "White", "Purple"};
-    private ImageIcon img = new ImageIcon("src/Icon.png");
+    private ImageIcon img = new javax.swing.ImageIcon(getClass().getResource("Icon.png"));
     private static String OS = System.getProperty("os.name").toLowerCase();
 
     public static void main(String[] args) {
@@ -76,8 +76,7 @@ public class SolarUI extends JFrame implements ActionListener {
         setIconImage(img.getImage());
         if(OS.contains("mac")) {
             Application application = Application.getApplication();
-            Image image = Toolkit.getDefaultToolkit().getImage(solar.getDir() + "/Icon.png");
-            application.setDockIconImage(image);
+            application.setDockIconImage(img.getImage());
         }
 
         //makes a new button

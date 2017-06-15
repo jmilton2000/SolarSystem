@@ -89,8 +89,7 @@ class Solar {
     //loads a sol file in to planets array
     void load(String name) throws FileNotFoundException {
         planets = new ArrayList<>();
-        InputStream in = getClass().getResourceAsStream(dir + "/Solar Saves/" + name + ".sol");
-        Scanner input = new Scanner(new File(dir + "/Solar Saves", name + ".sol"));
+        Scanner input = new Scanner(new File(dir + "/Solar Saves" + name + ".sol"));
         this.name = name;
         int num = input.nextInt();
         sunSize = input.nextInt();
