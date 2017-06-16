@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+//import com.apple.eawt.Application;//for mac
 
 public class SolarUI extends JFrame implements ActionListener {
 
@@ -22,8 +23,8 @@ public class SolarUI extends JFrame implements ActionListener {
     private JFrame f = new JFrame();
     private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.decode("#F39C12"), Color.CYAN, Color.WHITE, Color.decode("#8E44AD")};
     private String[] help = new String[]{"Red", "Green", "Blue", "Orange", "Cyan", "White", "Purple"};
-    private ImageIcon img = new javax.swing.ImageIcon("src/Icon.png");
-    private static String OS = System.getProperty("os.name").toLowerCase();
+    private ImageIcon img = new javax.swing.ImageIcon("src/Icon.png");//requares the Icon.png to be in same folder as the projram and that folder called src
+    //private ImageIcon img = new javax.swing.ImageIcon(getClass().getResource("Icon.png")); //this is for a jar file
 
     public static void main(String[] args) {
         new SolarUI().setVisible(true);
@@ -70,6 +71,9 @@ public class SolarUI extends JFrame implements ActionListener {
         frame.add(panel);
         frame.validate();
         frame.repaint();
+
+        //Application application = Application.getApplication(); //for mac
+        //application.setDockIconImage(img.getImage()); //for mac
 
         frame.setIconImage(img.getImage());
         setIconImage(img.getImage());
