@@ -19,8 +19,8 @@ import javax.swing.JTextField;
 public class SolarUI extends JFrame implements ActionListener {
 
     private Solar solar = new Solar();
-    private JFrame frame = new JFrame();
-    private JFrame f = new JFrame();
+    private JFrame frame = new JFrame();//drawing panel
+    private JFrame f = new JFrame();//frames for everything else
     private Color[] colors = new Color[]{Color.RED, Color.GREEN, Color.BLUE, Color.decode("#F39C12"), Color.CYAN, Color.WHITE, Color.decode("#8E44AD")};
     private String[] help = new String[]{"Red", "Green", "Blue", "Orange", "Cyan", "White", "Purple"};
     private ImageIcon img = new javax.swing.ImageIcon("src/Icon.png");//requares the Icon.png to be in same folder as the projram and that folder called src
@@ -142,7 +142,7 @@ public class SolarUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         String name = actionEvent.getActionCommand();
         if (name.equals("edit")) { //runs edit method
-            if (solar.getPlanets().size() != 0 && !f.isVisible()) {
+            if (solar.getPlanets().size() != 0 && !f.isVisible()) { //this is so that not to many frames are open
                 edit();
             }
         } else if (name.equalsIgnoreCase("exit")) { //exits program
@@ -164,7 +164,7 @@ public class SolarUI extends JFrame implements ActionListener {
             frame.repaint();
             f.dispose();
             setTitle(solar.getName());
-        } else if (name.equals("Swap")) {
+        } else if (name.equals("Swap")) { //swap planets
             if (solar.getPlanets().size() >= 2 && !f.isVisible()) {
                 swap();
             }
