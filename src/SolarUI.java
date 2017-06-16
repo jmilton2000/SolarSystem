@@ -71,8 +71,8 @@ public class SolarUI extends JFrame implements ActionListener {
         frame.validate();
         frame.repaint();
 
-        //frame.setIconImage(img.getImage());
-        //setIconImage(img.getImage());
+        frame.setIconImage(img.getImage());
+        setIconImage(img.getImage());
         //makes a new button
         JButton loadButton = new JButton("Edit Planet");
         JButton CreateButton = new JButton("Add Planet");
