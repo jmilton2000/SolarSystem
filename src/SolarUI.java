@@ -138,6 +138,9 @@ public class SolarUI extends JFrame implements ActionListener {
         add(CreateButton);
         add(SwapButton);
     }
+    //private Konami() {
+
+//    }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
@@ -354,6 +357,9 @@ public class SolarUI extends JFrame implements ActionListener {
                     } else if (f3.getText().startsWith("#") && f3.getText().length() == 7) {
                         color = 7;
                         planet.setCustomColor(f3.getText());
+                    } else if (f3.getText().equalsIgnoreCase("88224646ba")) {
+                        System.out.println("POGCHAMP");
+                        //System.out.print(new Konami().setVisible(true));
                     }
                     if (color != 7 && !f3.getText().equals(help[color])) {
                         f3.setText(help[color]);
