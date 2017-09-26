@@ -358,7 +358,7 @@ public class SolarUI extends JFrame implements ActionListener {
                         color = 7;
                         planet.setCustomColor(f3.getText());
                     } else if (f3.getText().equalsIgnoreCase("88224646ba")) {
-                        System.out.println("POGCHAMP");
+                        System.out.println("POG FUCKING CHAMP");
                         //System.out.print(new Konami().setVisible(true));
                     }
                     if (color != 7 && !f3.getText().equals(help[color])) {
