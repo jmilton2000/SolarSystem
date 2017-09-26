@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 //import com.apple.eawt.Application;//for mac
 
+//TEST PUSH FOR NEW ISSUE -RAY
 public class SolarUI extends JFrame implements ActionListener {
 
     private Solar solar = new Solar();
