@@ -31,16 +31,17 @@ public class SolarUI extends JFrame implements ActionListener {
     }
 
     private SolarUI() {
-        setTitle(solar.getName());
-        setSize(300, 200);
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setLayout(new GridLayout(3, 0));
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setSize(1200, 200);
-        frame.setResizable(false);
-        //setUndecorated(true);
+            setTitle(solar.getName());
+            System.out.println(getTitle());
+            setSize(300, 200);
+            setResizable(false);
+            setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            setLayout(new GridLayout(3, 0));
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            frame.setVisible(true);
+            frame.setSize(1200, 200);
+            frame.setResizable(false);
+            //setUndecorated(true);
         setLocation(frame.getX(), 200);
 
         //sets up drawing panel
@@ -199,7 +200,10 @@ public class SolarUI extends JFrame implements ActionListener {
                         System.out.println("file not found");
                     }
                     frame.repaint();
+                    frame.setTitle(solar.getName());
                     f.dispose();
+
+
                     setTitle(solar.getName());
                 }
             }
@@ -233,10 +237,11 @@ public class SolarUI extends JFrame implements ActionListener {
                             solar.export();
                         } catch (FileNotFoundException ex) {
                             System.out.println("ERROR: file not found");
-                        }
-                        frame.repaint();
-                        f.dispose();
-                        setTitle(solar.getName());
+                    }
+                    frame.repaint();
+                    frame.setTitle(solar.getName());
+                    f.dispose();
+                    setTitle(solar.getName());
                     } else {
                         f.add(over);
                         f.pack();
